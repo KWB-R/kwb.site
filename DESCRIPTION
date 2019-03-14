@@ -1,0 +1,28 @@
+Package: kwb.site
+Title: R Package for Scraping Our Offical KWB Website
+Version: 0.9.0.9000
+Authors@R: 
+    c(person(given = "Michael",
+             family = "Rustler",
+             role = c("aut", "cre"),
+             email = "michael.rustler@kompetenz-wasser.de",
+             comment = c(ORCID = "0000-0001-9134-2871")),
+      person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
+             role = "cph"))
+Description: This package contains functions for scraping
+    our offical [KWB website](https://kompetenz-wasser.de). The data for
+    all projects and people can be collected in order to provide an
+    overview of the website`s content and in order to be integrate that
+    data into a KWB knowledge repo.
+License: MIT + file LICENSE
+URL: https://github.com/KWB-R/kwb.site
+BugReports: https://github.com/KWB-R/kwb.site/issues
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    covr
+Imports: 
+    dplyr,
+    tibble,
+    rvest,
+    xml2
