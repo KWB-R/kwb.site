@@ -1,0 +1,37 @@
+#' Get Project URLs
+#'
+#' @param language website language "en" (English) or "de" (German), default: "en"
+#' @param debug print debug messages (default: TRUE)
+#' @return character vector with project urls
+#' @export
+#' @importFrom xml2 read_html
+#' @importFrom stringr str_subset
+#' @importFrom rvest  html_nodes html_attr
+#' @examples
+#' project_urls_en <- get_project_urls("en")
+#' head(project_urls_en)
+#'
+#' \dontrun{project_urls_de <- get_project_urls("de")
+#' head(project_urls_de)
+#' }
+#'
+get_project_urls <- function(language = "en", debug = TRUE) {
+
+  unlist(lapply(0:9, function(page_number)  {
+    if(page_number == 0) {
+      url <- sprintf("https://www.kompetenz-wasser.de/%s/project/",
+                     language)
+    } else {
+      url <- sprintf("https://www.kompetenz-wasser.de/%s/project/page/%d/",
+                     language,
+                     page_number)
+    }
+    if(debug) message(sprintf("Getting projects from: %s", url))
+    url %>%
+      xml2::read_html() %>%
+      rvest::html_nodes("a") %>%
+      rvest::html_attr("href") %>%
+      stringr::str_subset("page", negate = TRUE) %>%
+      stringr::str_subset(pattern = "/project/.+") %>%
+      unique()}))
+}

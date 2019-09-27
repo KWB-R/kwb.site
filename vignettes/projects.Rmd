@@ -1,0 +1,59 @@
+---
+title: "Projects"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Projects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(kwb.site)
+```
+
+
+# KWB Projects
+
+```{r}
+project_infos <- get_projects(debug=TRUE)
+jsonlite::write_json(project_infos, "projects.json")
+```
+
+We have in total `r nrow(project_infos)` project websites in German and English 
+on the KWB website.
+
+## English
+
+```{r}
+project_infos_en <- project_infos %>%
+  dplyr::filter(language == "en") 
+
+jsonlite::write_json(project_infos_en , "projects_en.json")
+
+DT::datatable(project_infos_en[,-3])
+
+```
+
+For `r nrow(project_infos_en)` projects the information is available in English.
+
+
+## German
+
+```{r}
+project_infos_de <- project_infos %>%
+  dplyr::filter(language == "de") 
+
+jsonlite::write_json(project_infos_de, "projects_de.json")
+
+DT::datatable(project_infos_de[,-3])
+
+```
+
+For `r nrow(project_infos_de)` projects the information is available in German.
