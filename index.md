@@ -1,4 +1,4 @@
-[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/github/KWB-R/kwb.site?branch=master&svg=true)](https://ci.appveyor.com/project/KWB-R/kwb-site/branch/master)
+[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/dlw7m5o8dtnjjqt9?svg=true)](https://ci.appveyor.com/project/KWB-R/kwb-site)
 [![Travis build Status](https://travis-ci.org/KWB-R/kwb.site.svg?branch=master)](https://travis-ci.org/KWB-R/kwb.site)
 [![codecov](https://codecov.io/github/KWB-R/kwb.site/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/kwb.site)
 url
