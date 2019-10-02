@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • kwb.site</title>
+<title>Helper function: Extract project IDs — extract_project_ids • kwb.site</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Helper function: Extract project IDs — extract_project_ids" />
+<meta property="og:description" content="Helper function: Extract project IDs" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -116,66 +118,40 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Helper function: Extract project IDs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/kwb.site/blob/master/R/plot_project_gant_chart.R'><code>R/plot_project_gant_chart.R</code></a></small>
+    <div class="hidden name"><code>extract_project_ids.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Helper function: Extract project IDs</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>extract_project_ids</span>(<span class='no'>title</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="extract_project_ids.html">extract_project_ids()</a></code> </p>
-        </td>
-        <td><p>Helper function: Extract project IDs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_project.html">get_project()</a></code> </p>
-        </td>
-        <td><p>Get Project</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_project_urls.html">get_project_urls()</a></code> </p>
-        </td>
-        <td><p>Get Project URLs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_projects.html">get_projects()</a></code> </p>
-        </td>
-        <td><p>Get Projects Info (English and German)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_project_gant_chart.html">plot_project_gant_chart()</a></code> </p>
-        </td>
-        <td><p>Create KWB Projects Gant Chart</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>title</th>
+      <td><p>project title (as retrieved by get_projects() function)</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>tibble with title and extracted project "id"</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
+
   </div>
 </div>
 
