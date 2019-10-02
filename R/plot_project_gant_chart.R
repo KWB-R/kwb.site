@@ -1,7 +1,9 @@
 #' Helper function: Extract project IDs
 #'
 #' @param title project title (as retrieved by get_projects() function)
-#'
+#' @importFrom stringr str_extract str_remove_all str_length
+#' @importFrom  tibble tibble
+#' @importFrom dplyr if_else
 #' @return tibble with title and extracted project "id"
 #' @export
 extract_project_ids <- function(title)  {
@@ -45,6 +47,7 @@ extract_project_ids <- function(title)  {
 #' @importFrom dplyr bind_rows left_join right_join count
 #' @import ggplot2
 #' @importFrom glue glue
+#' @importFrom forcats fct_reorder
 #' @examples
 #' \dontrun{
 #' projects_by_department_en <- plot_project_gant_chart()
@@ -93,7 +96,8 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
                             projects_selected$id) %>%
     dplyr::bind_rows(.id = "id") %>%
     dplyr::filter(select_pattern(.data$tags)) %>%
-    dplyr::right_join(projects_selected %>% dplyr::select(-tags)) %>%
+    dplyr::right_join(projects_selected %>%
+    dplyr::select(-.data$tags)) %>%
     dplyr::mutate(tooltip = sprintf("%s\nDuration: %s - %s (%2d months)",
                                     .data$id,
                                     .data$date_start,
@@ -104,7 +108,7 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
     dplyr::count(.data$tags) %>%
     dplyr::mutate(tags_n = sprintf("%s (n = %2d)", .data$tags, .data$n))
 
-  projects_gant <- projects_gant %>%  left_join(n_per_tag[,c("tags", "tags_n")])
+  projects_gant <- projects_gant %>%  dplyr::left_join(n_per_tag[,c("tags", "tags_n")])
   n_projects <- nrow(projects_gant)
 
   gg <- projects_gant %>%

@@ -17,15 +17,9 @@ Description: This package contains functions for scraping
 License: MIT + file LICENSE
 URL: https://github.com/KWB-R/kwb.site
 BugReports: https://github.com/KWB-R/kwb.site/issues
-Encoding: UTF-8
-LazyData: true
-Suggests: 
-    covr,
-    DT,
-    knitr,
-    rmarkdown
 Imports: 
     dplyr,
+    forcats,
     lubridate,
     jsonlite,
     glue,
@@ -35,8 +29,16 @@ Imports:
     stringr,
     tibble,
     rvest,
-    rlang, 
+    rlang,
     xml2,
     magrittr
+Suggests: 
+    covr,
+    DT,
+    knitr,
+    rmarkdown
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 6.1.1
-VignetteBuilder: knitr
