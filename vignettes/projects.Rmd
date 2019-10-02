@@ -93,6 +93,5 @@ plot_project_gant_chart(projects_json ="projects.json",language_selection = "de"
 plot_project_gant_chart(projects_json ="projects.json",
                         tag_selection = "topic",
                         language_selection = "de")
-)
 
 ``

@@ -61,8 +61,7 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
                                     language_selection = "en", ### or "de"
                                     interactive = FALSE,
                                     interactive_export = FALSE,
-                                    interactive_export_dir = "."
-) {
+                                    interactive_export_dir = ".") {
 
 
   projects <- jsonlite::fromJSON(projects_json, simplifyDataFrame = TRUE) %>%
@@ -146,6 +145,10 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
       plotly::layout(title = list(text = glue::glue("KWB projects by {tag_selection} (n = {n_projects}, last update: {last_update}, language: {language_selection})"),
                                   textposition = "top left"))
     if (interactive_export) {
+
+      export_list <- list(directory = interactive_export_dir,
+                          filename = glue::glue("projects-by-{tag_selection}_{language_selection}.html"),
+                          title = glue::glue("Projects by {tag_selection} ({language_selection})"))
 
       htmlwidgets::saveWidget(widget = gg,
                               file = file.path(export_list$directory,
