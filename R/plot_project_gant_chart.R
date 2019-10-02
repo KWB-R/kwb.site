@@ -89,7 +89,7 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
   last_update <- Sys.time()
 
   projects_selected <- projects %>%
-    dplyr::filter(language == language_selection)
+    dplyr::filter(.data$language == language_selection)
 
   projects_gant <- setNames(projects_selected$tags,
                             projects_selected$id) %>%

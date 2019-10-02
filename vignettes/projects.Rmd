@@ -89,7 +89,7 @@ plot_project_gant_chart(projects_json ="projects.json",language_selection = "de"
 
 ### By Topic
 
-```{r fig.height=15, fig.width=7}
+```{r eval = FALSE, fig.height=15, fig.width=7}
 plot_project_gant_chart(projects_json ="projects.json",
                         tag_selection = "topic",
                         language_selection = "de")
