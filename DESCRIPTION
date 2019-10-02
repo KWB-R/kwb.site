@@ -22,14 +22,19 @@ LazyData: true
 Suggests: 
     covr,
     DT,
-    jsonlite,
     knitr,
     rmarkdown
 Imports: 
     dplyr,
+    jsonlite,
+    glue,
+    ggplot2,
+    htmlwidgets,
+    plotly,
     stringr,
     tibble,
     rvest,
+    rlang, 
     xml2,
     magrittr
 RoxygenNote: 6.1.1

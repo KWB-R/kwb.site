@@ -19,7 +19,7 @@ library(kwb.site)
 ```
 
 
-# KWB Projects
+# Tables
 
 ```{r}
 project_infos <- get_projects(debug=TRUE)
@@ -57,3 +57,31 @@ DT::datatable(project_infos_de[,-3])
 ```
 
 For `r nrow(project_infos_de)` projects the information is available in German.
+
+
+# Plots
+
+```{r}
+project_infos <- get_projects(debug=TRUE)
+jsonlite::write_json(project_infos, "projects.json")
+```
+
+We have in total `r nrow(project_infos)` project websites in German and English 
+on the KWB website.
+
+## English
+
+## By Department
+
+```{r fig.height=15, fig.width=7}
+plot_project_gant_chart(project_json ="projects.json")
+
+```
+
+## By Topic
+
+```{r fig.height=15, fig.width=7}
+plot_project_gant_chart(project_json ="projects.json", tag_selection = "topic")
+
+``
+
