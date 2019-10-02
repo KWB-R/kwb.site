@@ -68,14 +68,14 @@ For `r nrow(project_infos_de)` projects the information is available in German.
 ### By Department
 
 ```{r fig.height=15, fig.width=7}
-plot_project_gant_chart(project_json ="projects.json")
+plot_project_gant_chart(projects_json ="projects.json")
 
 ```
 
 ### By Topic
 
 ```{r fig.height=15, fig.width=7}
-plot_project_gant_chart(project_json ="projects.json", tag_selection = "topic")
+plot_project_gant_chart(projects_json = "projects.json", tag_selection = "topic")
 ```
 
 ## German
@@ -83,14 +83,14 @@ plot_project_gant_chart(project_json ="projects.json", tag_selection = "topic")
 ### By Department
 
 ```{r fig.height=15, fig.width=7}
-plot_project_gant_chart(project_json ="projects.json",language_selection = "de")
+plot_project_gant_chart(projects_json ="projects.json",language_selection = "de")
 
 ```
 
 ### By Topic
 
 ```{r fig.height=15, fig.width=7}
-plot_project_gant_chart(project_json ="projects.json",
+plot_project_gant_chart(projects_json ="projects.json",
                         tag_selection = "topic",
                         language_selection = "de")
 )
