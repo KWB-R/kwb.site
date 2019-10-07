@@ -108,7 +108,7 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
     dplyr::mutate(tags_n = sprintf("%s (n = %2d)", .data$tags, .data$n))
 
   projects_gant <- projects_gant %>%  dplyr::left_join(n_per_tag[,c("tags", "tags_n")])
-  n_projects <- nrow(projects_gant)
+  n_projects <- length(unique(projects_gant$id))
 
   gg <- projects_gant %>%
     ggplot2::ggplot(ggplot2::aes(
