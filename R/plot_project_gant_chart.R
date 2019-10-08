@@ -20,7 +20,7 @@ extract_project_ids <- function(title)  {
                  id_2 = stringr::str_extract(title, pattern = "\\(.*\\)") %>%
                    stringr::str_remove_all("\\(|\\)") %>%
                    stringr::str_trim(),
-                 id = dplyr::if_else(is.na(id_1), id_2, id_1) %>%
+                 id = dplyr::if_else(is.na(.data$id_1), .data$id_2, .data$id_1) %>%
                    stringr::str_trim()
   )
 }
@@ -51,6 +51,7 @@ extract_project_ids <- function(title)  {
 #' @import ggplot2
 #' @importFrom glue glue
 #' @importFrom forcats fct_reorder
+#' @importFrom stats setNames
 #' @examples
 #' \dontrun{
 #' projects_by_department_en <- plot_project_gant_chart()
@@ -98,7 +99,7 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
   projects_selected <- projects %>%
     dplyr::filter(.data$language == language_selection)
 
-  projects_gant <- setNames(projects_selected$tags,
+  projects_gant <- stats::setNames(projects_selected$tags,
                             projects_selected$id) %>%
     dplyr::bind_rows(.id = "id") %>%
     dplyr::filter(select_pattern(.data$tags)) %>%
