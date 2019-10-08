@@ -24,6 +24,7 @@ library(kwb.site)
 ```{r}
 # Get project infos from KWB website
 project_infos <- get_projects(debug = FALSE)
+project_infos <- project_infos[! duplicated(project_infos), ]
 jsonlite::write_json(project_infos, "projects.json")
 ```
 
