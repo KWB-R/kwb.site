@@ -17,7 +17,7 @@
 #'
 get_project_urls <- function(language = "en", debug = TRUE) {
 
-  unlist(lapply(0:9, function(page_number)  {
+  unique(unlist(lapply(0:9, function(page_number)  {
     if(page_number == 0) {
       url <- sprintf("https://www.kompetenz-wasser.de/%s/project/",
                      language)
@@ -33,5 +33,5 @@ get_project_urls <- function(language = "en", debug = TRUE) {
       rvest::html_attr("href") %>%
       stringr::str_subset("page", negate = TRUE) %>%
       stringr::str_subset(pattern = "/project/.+") %>%
-      unique()}))
+      unique()})))
 }

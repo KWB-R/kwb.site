@@ -24,8 +24,15 @@ library(kwb.site)
 ```{r}
 # Get project infos from KWB website
 project_infos <- get_projects(debug = FALSE)
-project_infos <- project_infos[! duplicated(project_infos), ]
 jsonlite::write_json(project_infos, "projects.json")
+plot_project_gant_chart(projects_json = "projects.json", 
+                        tag_selection = "department", 
+                        interactive = TRUE, 
+                        interactive_export = TRUE)
+plot_project_gant_chart(projects_json = "projects.json", 
+                        tag_selection = "topics", 
+                        interactive = TRUE, 
+                        interactive_export = TRUE)
 ```
 
 We have in total `r nrow(project_infos)` project websites in German and English 
