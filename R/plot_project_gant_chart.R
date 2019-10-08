@@ -10,15 +10,18 @@ extract_project_ids <- function(title)  {
 
   id_1 <- stringr::str_extract(title,
                                pattern = ".*\u2013|netWORKS4") %>%
-    stringr::str_remove_all("\u2013")
+    stringr::str_remove_all("\u2013") %>%
+    stringr::str_trim()
 
   id_1 <- ifelse(stringr::str_length(id_1)>30, NA_character_, id_1)
 
   tibble::tibble(title = title,
                  id_1 =  id_1,
                  id_2 = stringr::str_extract(title, pattern = "\\(.*\\)") %>%
-                   stringr::str_remove_all("\\(|\\)"),
-                 id = dplyr::if_else(is.na(id_1), id_2, id_1)
+                   stringr::str_remove_all("\\(|\\)") %>%
+                   stringr::str_trim(),
+                 id = dplyr::if_else(is.na(id_1), id_2, id_1) %>%
+                   stringr::str_trim()
   )
 }
 
@@ -35,7 +38,7 @@ extract_project_ids <- function(title)  {
 #' default: FALSE
 #' @param interactive_export_dir export directory in case of interactive = TRUE,
 #' default: "."
-#'
+#' @param alpha alpha (default: 0.5)
 #' @return KWB projects gant chart
 #' @export
 #' @importFrom jsonlite fromJSON
@@ -61,11 +64,15 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
                                     language_selection = "en", ### or "de"
                                     interactive = FALSE,
                                     interactive_export = FALSE,
-                                    interactive_export_dir = ".") {
+                                    interactive_export_dir = ".",
+                                    alpha = 0.5) {
 
 
   projects <- jsonlite::fromJSON(projects_json, simplifyDataFrame = TRUE) %>%
-    dplyr::mutate(date_start = lubridate::dmy(.data$date_start),
+    dplyr::mutate(duration_months = dplyr::if_else(is.na(.data$duration_months),
+                                                   as.integer(.data$duration_years * 12),
+                                                   .data$duration_months),
+                  date_start = lubridate::dmy(.data$date_start),
                   date_end = .data$date_start + months(.data$duration_months+1) - 1,
                   id = extract_project_ids(.data$title)$id)
 
@@ -95,6 +102,8 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
                             projects_selected$id) %>%
     dplyr::bind_rows(.id = "id") %>%
     dplyr::filter(select_pattern(.data$tags)) %>%
+    dplyr::count(.data$id, .data$tags) %>%
+    dplyr::select(-.data$n) %>%
     dplyr::right_join(projects_selected %>%
     dplyr::select(-.data$tags)) %>%
     dplyr::mutate(tooltip = sprintf("%s\nDuration: %s - %s (%2d months)",
@@ -123,6 +132,7 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
     ) +
     ggplot2::geom_segment(ggplot2::aes(yend = .data$id, xend = .data$date_end),
                           size = 1.3,
+                          alpha = alpha,
                           arrow = ggplot2::arrow(length = ggplot2::unit(0.1, "inches"))
     ) +
     ggplot2::theme_bw() +

@@ -14,10 +14,12 @@ get_projects <- function(debug = TRUE) {
 
   project_urls_en <- get_project_urls("en", debug)
 
-  project_infos_en <- lapply(project_urls_en, get_project_debug)
+  project_infos_en <- lapply(project_urls_en, get_project_debug) %>%
+    dplyr::bind_rows()
 
   project_urls_de <- get_project_urls("de", debug)
-  project_infos_de <- lapply(project_urls_de, get_project_debug)
+  project_infos_de <- lapply(project_urls_de, get_project_debug) %>%
+    dplyr::bind_rows()
 
   if(debug) {
     message(sprintf("Project URLs found (n=%3d):  %3d (in English), %3d (in German)",

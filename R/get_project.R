@@ -21,21 +21,10 @@ get_project <- function(url, debug = TRUE) {
   if(debug) print(url)
   site <- xml2::read_html(url)
 
-  project_manager <- tibble::tibble(
-    degree = site %>%
-      rvest::html_nodes("span.degree") %>%
-      rvest::html_text(),
-    first_name = site %>%
-      rvest::html_nodes("span.firstname") %>%
-      rvest::html_text(),
-    last_name = site %>%
-      rvest::html_nodes("span.lastname") %>%
-      rvest::html_text()
-  )
-
   title <- site %>%
     rvest::html_node("h1.entry-title.hyphenate") %>%
-    rvest::html_text()
+    rvest::html_text() %>%
+    stringr::str_trim()
 
 
   #title_split <- as.character(stringr::str_split(title,pattern = " – ",
@@ -47,26 +36,39 @@ get_project <- function(url, debug = TRUE) {
     title = title,
     degree = site %>%
       rvest::html_nodes("span.degree") %>%
-      rvest::html_text(),
+      rvest::html_text() %>%
+      stringr::str_trim(),
     first_name = site %>%
       rvest::html_nodes("span.firstname") %>%
-      rvest::html_text(),
+      rvest::html_text() %>%
+      stringr::str_trim(),
     last_name = site %>%
       rvest::html_nodes("span.lastname") %>%
-      rvest::html_text()
+      rvest::html_text() %>%
+      stringr::str_trim()
   )
 
   tags <- tibble::tibble(title = title,
                          tags = site %>%
                            rvest::html_node("div.terms-container") %>%
                            rvest::html_nodes("a") %>%
-                           rvest::html_text())
+                           rvest::html_text() %>%
+                           stringr::str_trim())
 
   keyfacts <- site %>%
     rvest::html_nodes("div.inner") %>%
     rvest::html_node("p") %>%
     rvest::html_text()
 
+  language <- stringr::str_extract(url, "/de/|/en/") %>% stringr::str_remove_all("/")
+
+  if(language == "en") {
+    month_name <- "month"
+    year_name <- "year"
+  } else {
+    month_name <- "Monat"
+    year_name <- "Jahr"
+  }
 
   infos <- tibble::tibble(title = title,
                           subtitle = site %>%
@@ -77,13 +79,19 @@ get_project <- function(url, debug = TRUE) {
                             rvest::html_text(),
                           budget = keyfacts[1],
                           date_start = keyfacts[2],
+                          duration_years = as.integer(stringr::str_extract(keyfacts[3],
+                                                                           pattern = sprintf("[0-9][0-9]?\\s+?%s", year_name)) %>%
+                                                      stringr::str_remove(year_name) %>%
+                                                      stringr::str_trim()),
                           duration_months = as.integer(stringr::str_extract(keyfacts[3],
-                                                                            pattern = "[0-9][0-9]?")),
+                                                                            pattern = sprintf("[0-9][0-9]?\\s+?%s", month_name)) %>%
+                                                        stringr::str_remove(month_name) %>%
+                                                        stringr::str_trim()),
                           funder_logo_url = site %>%
                             rvest::html_node("img.alignnone") %>%
                             rvest::html_attr("src"),
                           url = url,
-                          language = stringr::str_extract(url, "/de/|/en/") %>% stringr::str_remove_all("/"))
+                          language = language)
 
   infos %>%
     dplyr::nest_join(tags, by = "title") %>%
