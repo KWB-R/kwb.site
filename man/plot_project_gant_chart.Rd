@@ -8,7 +8,7 @@
   plot_project_gant_chart(projects_json = "https://kwb-r.github.io/kwb.site/projects.json",
   tag_selection = "department", language_selection = "en",
   interactive = FALSE, interactive_export = FALSE,
-  interactive_export_dir = ".")
+  interactive_export_dir = ".", alpha = 0.5)
 }
 \arguments{
 \item{projects_json}{default: "https://kwb-r.github.io/kwb.site/projects.json")}
@@ -24,6 +24,8 @@ default: FALSE}
 
 \item{interactive_export_dir}{export directory in case of interactive = TRUE,
 default: "."}
+
+\item{alpha}{alpha (default: 0.5)}
 }
 \value{
 KWB projects gant chart
