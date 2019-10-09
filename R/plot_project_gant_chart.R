@@ -137,15 +137,18 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
                           arrow = ggplot2::arrow(length = ggplot2::unit(0.1, "inches"))
     ) +
     ggplot2::theme_bw() +
-    ggplot2::theme(legend.position = "top") +
+    ggplot2::theme(legend.position = "top",
+                   axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = 0.5)) +
     ggplot2::labs(
       title = glue::glue("KWB projects by {tag_selection} (n = {n_projects})"),
       # subtitle = glue::glue("Last update: {last_update}"),
-      y = "Project id",
+      y = "",
       x = "Date",
       col = "",
       caption = glue::glue("Last update: {last_update}, language: {language_selection}")
-    )
+    ) +
+    ggplot2::scale_x_date(date_breaks = "1 year",
+                          date_labels = "%Y")
 
 
 
