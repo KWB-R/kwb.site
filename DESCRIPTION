@@ -38,6 +38,8 @@ Suggests:
     DT,
     knitr,
     rmarkdown
+Remotes:
+    github::kwb-r/kwb.utils
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
