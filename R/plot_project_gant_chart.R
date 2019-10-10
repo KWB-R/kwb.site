@@ -77,16 +77,17 @@ plot_project_gant_chart <- function(projects_json = "https://kwb-r.github.io/kwb
                   date_end = .data$date_start + months(.data$duration_months+1) - 1,
                   id = extract_project_ids(.data$title)$id)
 
+department_pattern <- "Unit|Bereich"
 
   if(tag_selection == "department") {
     select_pattern <- function(tags) {
       stringr::str_detect(tags,
-                          pattern = "Unit|Bereich|Pollution")
+                          pattern = department_pattern)
     }
   } else {
     select_pattern <- function(tags) {
       stringr::str_detect(tags,
-                          pattern = "Unit|Bereich|Pollution",
+                          pattern = department_pattern,
                           negate = TRUE)
     }
 
