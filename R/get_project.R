@@ -1,3 +1,40 @@
+#' Helper function: extract funder ids
+#'
+#' @param funder_logo_urls vector with funder urls
+#'
+#' @return vector with funder names
+#' @importFrom kwb.utils multiSubstitute
+#' @export
+#'
+extract_funder_ids <- function(funder_logo_urls) {
+
+funder_list <- list(".*bwb.*|.*berliner-wasserbetriebe.*" = "bwb",
+                    ".*veolia.*" = "veolia",
+                    ".*_eu-*|.*eu-flagge.*|.*ddab935499.*" = "eu",
+                    ".*life_.*|.*liwelife.*" = "eu_life",
+                    ".*eu_horizon2020.*" = "eu_h-2020",
+                    ".*8125a39f4a.*" = "eu_efre",
+                    ".*interreg_baltic_sea.*" = "eu_interreg_baltic-sea-region",
+                    ".*reef2w.*" = "eu_interreg_central-europe",
+                    ".*ebene-21.*" = "eu_h-2020",
+                    ".*bbi.*" = "bbi",
+                    ".*bic.*" = "bic",
+                    ".*bmbf.*|.*/mbf-.*" = "bmbf",
+                    ".*bmwi.*" = "bmwi",
+                    ".*bmu.*" = "bmu",
+                    ".*dbu.*" = "dbu",
+                    ".*lidkopingskommun.*" = "lidkopingskommun",
+                    ".*nawam_rewam.*" = "nawam_rewam",
+                    ".*senuvk.*" = "senuvk",
+                    ".*umwelt-bundesamt.*|.*koop_farbig_negativ.*" = "uba",
+                    ".*waterjpi.*" = "waterjpi")
+
+
+kwb.utils::multiSubstitute(funder_logo_urls,
+                           replacements = funder_list)
+
+}
+
 #' Get Project
 #'
 #' @param url url of KWB project
@@ -55,10 +92,17 @@ get_project <- function(url, debug = TRUE) {
                            rvest::html_text() %>%
                            stringr::str_trim())
 
+
+ funder_logo_url <- site %>%
+    rvest::html_nodes("div.financing") %>%
+    rvest::html_nodes("img") %>%
+    rvest::html_attr("src")
+
   funders <- tibble::tibble(title = title,
-                            funder_logo_url = site %>%
-                              rvest::html_nodes("img.alignnone") %>%
-                              rvest::html_attr("src"))
+                            funder_logo_url = ifelse(length(funder_logo_url) == 0,
+                                                             NA_character_,
+                                                             funder_logo_url),
+                            funder_id = extract_funder_ids(funder_logo_url))
 
 
   keyfacts <- site %>%

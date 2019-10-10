@@ -23,6 +23,7 @@ Imports:
     lubridate,
     jsonlite,
     glue,
+    kwb.utils,
     ggplot2,
     htmlwidgets,
     plotly,
