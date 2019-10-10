@@ -108,7 +108,8 @@ department_pattern <- "Unit|Bereich"
     dplyr::select(-.data$n) %>%
     dplyr::right_join(projects_selected %>%
     dplyr::select(-.data$tags)) %>%
-    dplyr::mutate(tooltip = sprintf("%s\nDuration: %s - %s (%2d months)",
+    dplyr::mutate(tooltip = sprintf("<a href='%s'>%s</a>\nDuration: %s - %s (%2d months)",
+                                    .data$url,
                                     .data$id,
                                     .data$date_start,
                                     .data$date_end,
