@@ -88,7 +88,7 @@ get_project <- function(url, debug = TRUE) {
                                                         stringr::str_remove(month_name) %>%
                                                         stringr::str_trim()),
                           funder_logo_url = site %>%
-                            rvest::html_node("img.alignnone") %>%
+                            rvest::html_nodes("img.alignnone") %>%
                             rvest::html_attr("src"),
                           url = url,
                           language = language)
