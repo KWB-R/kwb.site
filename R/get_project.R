@@ -8,7 +8,8 @@
 #'
 extract_funder_ids <- function(funder_logo_urls) {
 
-funder_list <- list(".*bwb.*|.*berliner-wasserbetriebe.*" = "bwb",
+funder_list <- list(".*abwasserverband-braunschweig.*" = "av-bs",
+                    ".*bwb.*|.*berliner-wasserbetriebe.*" = "bwb",
                     ".*veolia.*" = "veolia",
                     ".*_eu-*|.*eu_logo.*|.*eu-flagge.*|.*ddab935499.*" = "eu",
                     ".*life_.*|.*liwelife.*" = "eu_life",
@@ -24,11 +25,11 @@ funder_list <- list(".*bwb.*|.*berliner-wasserbetriebe.*" = "bwb",
                     ".*bmu.*" = "bmu",
                     ".*dbu.*" = "dbu",
                     ".*lidkopingskommun.*" = "lidkopingskommun",
-                    ".*nawam_rewam.*" = "nawam_rewam",
+                    ".*se-bs.*" = "se-bs",
                     ".*senuvk.*" = "senuvk",
                     ".*umwelt-bundesamt.*|.*koop_farbig_negativ.*|.*logo.jpg$" = "uba",
                     ".*waterjpi.*" = "waterjpi",
-                    ".*2f60641ec7.*" = NA_character_)
+                    ".*7-th-framework-programming.*|.*nawam_rewam.*|.*fona.*|.*2f60641ec7.*" = "")
 
 
 kwb.utils::multiSubstitute(funder_logo_urls,

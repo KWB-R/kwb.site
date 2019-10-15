@@ -25,12 +25,29 @@ library(kwb.site)
 # Get project infos from KWB website
 project_infos <- get_projects(debug = FALSE)
 jsonlite::write_json(project_infos, "projects.json")
-plot_project_gant_chart(projects_json = "projects.json", 
+pi1 <- plot_gantt_chart_project(projects_json = "projects.json", 
                         tag_selection = "department", 
                         interactive = TRUE, 
                         interactive_export = TRUE)
-plot_project_gant_chart(projects_json = "projects.json", 
+pi2 <- plot_gantt_chart_project(projects_json = "projects.json", 
                         tag_selection = "topics", 
+                        interactive = TRUE, 
+                        interactive_export = TRUE)
+pi3 <- plot_gantt_chart_project_by_funder(projects_json = "projects.json", 
+                        interactive = TRUE, 
+                        interactive_export = TRUE)
+pi4 <- plot_gantt_chart_project(projects_json = "projects.json", 
+                        tag_selection = "department", 
+                        language_selection = "de",
+                        interactive = TRUE, 
+                        interactive_export = TRUE)
+pi5 <- plot_gantt_chart_project(projects_json = "projects.json", 
+                        tag_selection = "topics", 
+                        language_selection = "de",
+                        interactive = TRUE, 
+                        interactive_export = TRUE)
+pi6 <- plot_gantt_chart_project_by_funder(projects_json = "projects.json", 
+                        language_selection = "de",                                          
                         interactive = TRUE, 
                         interactive_export = TRUE)
 ```
@@ -80,11 +97,24 @@ plot_project_gant_chart(projects_json ="projects.json")
 
 ```
 
+[Interactive plot: projects-by-department_en](../projects-by-department_en.html)
+
+
 ### By Topic
 
 ```{r fig.height=15, fig.width=9}
 plot_project_gant_chart(projects_json = "projects.json", tag_selection = "topic")
 ```
+
+[Interactive plot: projects-by-topics_en](../projects-by-topics_en.html)
+
+### By Funder
+
+```{r eval = FALSE, fig.height=15, fig.width=9}
+plot_gantt_chart_project_by_funder(projects_json = "projects.json")
+```
+
+[Interactive plot: projects-by-funder_en](../projects-by-funder_en.html)
 
 ## German
 
@@ -95,6 +125,9 @@ plot_project_gant_chart(projects_json ="projects.json",language_selection = "de"
 
 ```
 
+[Interactive plot: projects-by-department_de](../projects-by-department_de.html)
+
+
 ### By Topic
 
 ```{r eval = FALSE, fig.height=15, fig.width=9}
@@ -102,4 +135,15 @@ plot_project_gant_chart(projects_json ="projects.json",
                         tag_selection = "topic",
                         language_selection = "de")
 
-``
+```
+
+[Interactive plot: projects-by-topics_de](../projects-by-topics_de.html)
+
+### By Funder
+
+```{r eval = FALSE, fig.height=15, fig.width=9}
+plot_gantt_chart_project_by_funder(projects_json = "projects.json",
+                                   language_selection = "de")
+```
+
+[Interactive plot: projects-by-funder_de](../projects-by-funder_de.html)

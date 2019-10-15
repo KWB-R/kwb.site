@@ -1,18 +1,22 @@
 if(FALSE) {
-  rs <- RSelenium::rsDriver(browser = "firefox", geckover = "0.25.0")
+  rs_serverclient <- RSelenium::rsDriver(browser = "firefox", geckover = "0.25.0")
+  rs <- rs_serverclient$client
 
-  rs$client$open()
-  rs$client$navigate("https://kompetenz-wasser.de")
+  rs$open()
+  rs$navigate("https://www.kompetenz-wasser.de/de/veranstaltungen/")
 
-  for(i in 1:10) {
-    button_loadmore <- rs$client$findElement(using = "xpath", value = "//button[contains(@class,'load-more')]")
+for(i in 1:20) {
+    button_loadmore <- rs$findElement(using = "xpath", value = "//button[@class='load-more']")
     button_loadmore$clickElement()
-    Sys.sleep(5)
+    Sys.sleep(3)
   }
 
-  projects_html <- xml2::read_html(rs$client$getPageSource()[[1]])
-  xml2::write_html(projects_html, "projects.html")
-
+  events_html <- xml2::read_html(rs$getPageSource()[[1]])
+  xml2::write_html(events_html, "events.html")
+  event_urls <- events_html %>%
+    rvest::html_nodes("a.overlay") %>%
+    rvest::html_attr("href")
+  rs$navigate(event_urls[1])
   rs$client$open()
   rs$client$navigate("https://kompetenz-wasser.de/de/forschung/archiv/")
 
