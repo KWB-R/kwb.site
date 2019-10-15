@@ -71,7 +71,7 @@ get_project <- function(url, debug = TRUE) {
   #                                               simplify = TRUE))
 
 
-  project_manager <- tibble::tibble(
+  contacts <- tibble::tibble(
     title = title,
     degree = site %>%
       rvest::html_nodes("span.degree") %>%
@@ -83,6 +83,10 @@ get_project <- function(url, debug = TRUE) {
       stringr::str_trim(),
     last_name = site %>%
       rvest::html_nodes("span.lastname") %>%
+      rvest::html_text() %>%
+      stringr::str_trim(),
+    email = site %>%
+      rvest::html_nodes(xpath = "//li//div[@class='email']") %>%
       rvest::html_text() %>%
       stringr::str_trim()
   )
@@ -140,6 +144,7 @@ get_project <- function(url, debug = TRUE) {
                                             downloads_html %>%
                      rvest::html_attr("href")))
 
+
   infos <- tibble::tibble(title = title,
                           subtitle = site %>%
                             rvest::html_node("div.subtitle.hyphenate") %>%
@@ -162,7 +167,7 @@ get_project <- function(url, debug = TRUE) {
 
   infos %>%
     dplyr::nest_join(tags, by = "title") %>%
-    dplyr::nest_join(project_manager, "title") %>%
+    dplyr::nest_join(contacts, "title") %>%
     dplyr::nest_join(funders, "title") %>%
     dplyr::nest_join(downloads, "title")
 
