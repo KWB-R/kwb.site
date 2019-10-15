@@ -126,6 +126,20 @@ get_project <- function(url, debug = TRUE) {
     year_name <- "Jahr"
   }
 
+  downloads_html <- site %>%
+    rvest::html_node(css = "div.download-container") %>%
+    rvest::html_nodes("a")
+
+  downloads <-  tibble::tibble(title = title,
+                               dl_name = ifelse(length(downloads_html)==0,
+                                            NA_character_,
+                                            downloads_html %>%
+                                 rvest::html_text()),
+                   dl_link = ifelse(length(downloads_html)==0,
+                                            NA_character_,
+                                            downloads_html %>%
+                     rvest::html_attr("href")))
+
   infos <- tibble::tibble(title = title,
                           subtitle = site %>%
                             rvest::html_node("div.subtitle.hyphenate") %>%
@@ -149,6 +163,7 @@ get_project <- function(url, debug = TRUE) {
   infos %>%
     dplyr::nest_join(tags, by = "title") %>%
     dplyr::nest_join(project_manager, "title") %>%
-    dplyr::nest_join(funders, "title")
+    dplyr::nest_join(funders, "title") %>%
+    dplyr::nest_join(downloads, "title")
 
 }
