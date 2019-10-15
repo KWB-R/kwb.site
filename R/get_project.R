@@ -144,15 +144,16 @@ partners <- tibble::tibble(title = title,
     rvest::html_node(css = "div.download-container") %>%
     rvest::html_nodes("a")
 
-  downloads <-  tibble::tibble(title = title,
-                               dl_name = ifelse(length(downloads_html)==0,
-                                            NA_character_,
-                                            downloads_html %>%
-                                 rvest::html_text()),
-                   dl_link = ifelse(length(downloads_html)==0,
-                                            NA_character_,
-                                            downloads_html %>%
-                     rvest::html_attr("href")))
+  downloads <- if (length(downloads_html) == 0) {
+    tibble::tibble(title = title,
+                   dl_name = NA_character_,
+                   dl_link =  NA_character_) 
+  } else { 
+    tibble::tibble(title = title,
+                   dl_name = downloads_html %>% rvest::html_text(),
+                   dl_link =  downloads_html %>% rvest::html_attr("href")
+                  )
+    }
 
   press_htmls <- site %>%
     rvest::html_node(xpath = "//ul[@class='press-item-grid scrollpopup']") %>%
