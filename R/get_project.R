@@ -99,6 +99,15 @@ get_project <- function(url, debug = TRUE) {
                            rvest::html_text() %>%
                            stringr::str_trim())
 
+ partner_html <- site %>%
+    rvest::html_node("div.project-partner")
+
+partners <- tibble::tibble(title = title,
+                partner_url = ifelse(length(partner_html)==0,
+                NA_character_,
+                partner_html %>%
+    rvest::html_nodes("img") %>%
+    rvest::html_attr("src")))
 
  funder_logo_url <- site %>%
     rvest::html_node("div.financing") %>%
@@ -203,8 +212,10 @@ get_project <- function(url, debug = TRUE) {
   infos %>%
     dplyr::nest_join(tags, by = "title") %>%
     dplyr::nest_join(contacts, "title") %>%
+    dplyr::nest_join(partners, "title")  %>%
     dplyr::nest_join(funders, "title") %>%
     dplyr::nest_join(downloads, "title") %>%
     dplyr::nest_join(press, "title")
+
 
 }
