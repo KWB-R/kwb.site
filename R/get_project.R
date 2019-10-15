@@ -48,6 +48,7 @@ kwb.utils::multiSubstitute(funder_logo_urls,
 #' @importFrom rvest html_node html_nodes html_text html_attr
 #' @importFrom stringr str_extract
 #' @importFrom dplyr nest_join
+#' @importFrom data.table rbindlist
 #' @examples
 #' url <- "https://www.kompetenz-wasser.de/en/project/flusshygiene/"
 #' project_info <- get_project(url)
@@ -144,6 +145,40 @@ get_project <- function(url, debug = TRUE) {
                                             downloads_html %>%
                      rvest::html_attr("href")))
 
+  press_htmls <- site %>%
+    rvest::html_node(xpath = "//ul[@class='press-item-grid scrollpopup']") %>%
+    rvest::html_nodes("li")
+
+
+ press <- if(length(press_htmls)==0) {
+   tibble::tibble(title = title,
+                  press_category = NA_character_,
+                  press_title = NA_character_,
+                  press_source = NA_character_,
+                  press_date = NA,
+                  press_description = NA_character_)
+   } else {
+     data.table::rbindlist(lapply(press_htmls, function(press_html) {
+             tibble::tibble(title = title,
+                           press_category = press_html %>%
+                                            rvest::html_attr("data-category"),
+                           press_title = press_html %>%
+                                                        rvest::html_node("h3") %>%
+                                                        rvest::html_text(),
+                           press_source = press_html %>%
+                                                  rvest::html_node("span.source") %>%
+                                                  rvest::html_text(),
+                           press_date = press_html %>%
+                                                   rvest::html_node("span.date") %>%
+                                                   rvest::html_text() %>%
+                                                   lubridate::dmy(),
+                           press_description = press_html %>%
+                                            rvest::html_node("div.description") %>%
+                                            rvest::html_text())}))
+     }
+
+
+
 
   infos <- tibble::tibble(title = title,
                           subtitle = site %>%
@@ -169,6 +204,7 @@ get_project <- function(url, debug = TRUE) {
     dplyr::nest_join(tags, by = "title") %>%
     dplyr::nest_join(contacts, "title") %>%
     dplyr::nest_join(funders, "title") %>%
-    dplyr::nest_join(downloads, "title")
+    dplyr::nest_join(downloads, "title") %>%
+    dplyr::nest_join(press, "title")
 
 }
