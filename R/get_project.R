@@ -201,7 +201,8 @@ partners <- tibble::tibble(title = title,
     get_project_press(site)
   } else {
     data.table::rbindlist(lapply(seq_len(max_press_sites), function(id) {
-      press_url <- sprintf("%s/?press-item-paged=%d", url, id)
+      press_url <- sprintf("%s/?press-item-paged=%d",
+                           sub(pattern = "/$", "", url), id)
       get_project_press(site = xml2::read_html(press_url))}))
   }
 
