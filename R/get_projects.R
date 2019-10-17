@@ -14,12 +14,12 @@ get_projects <- function(debug = TRUE) {
 
   project_urls_en <- get_project_urls("en", debug)
 
-  project_infos_en <- lapply(project_urls_en, get_project_debug) %>%
-    dplyr::bind_rows()
+  project_infos_en <- data.table::rbindlist(lapply(project_urls_en,
+                                                   get_project_debug))
 
   project_urls_de <- get_project_urls("de", debug)
-  project_infos_de <- lapply(project_urls_de, get_project_debug) %>%
-    dplyr::bind_rows()
+  project_infos_de <- data.table::rbindlist(lapply(project_urls_de,
+                                                   get_project_debug))
 
   if(debug) {
     message(sprintf("Project URLs found (n=%3d):  %3d (in English), %3d (in German)",
@@ -27,6 +27,6 @@ get_projects <- function(debug = TRUE) {
                     length(project_urls_en),
                     length(project_urls_de)))
   }
-  dplyr::bind_rows(project_infos_en, project_infos_de)
+  data.table::rbindlist(list(project_infos_en, project_infos_de))
 
   }

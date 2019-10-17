@@ -37,6 +37,42 @@ kwb.utils::multiSubstitute(funder_logo_urls,
 
 }
 
+
+get_project_press <- function(site) {
+  press_htmls <- site %>%
+    rvest::html_node(xpath = "//ul[@class='press-item-grid scrollpopup']") %>%
+    rvest::html_nodes("li")
+
+
+  press <- if(length(press_htmls)==0) {
+    tibble::tibble(press_category = NA_character_,
+                   press_title = NA_character_,
+                   press_source = NA_character_,
+                   press_date = NA,
+                   press_description = NA_character_)
+  } else {
+    data.table::rbindlist(lapply(press_htmls, function(press_html) {
+      tibble::tibble(press_category = press_html %>%
+                       rvest::html_attr("data-category"),
+                     press_title = press_html %>%
+                       rvest::html_node("h3") %>%
+                       rvest::html_text(),
+                     press_source = press_html %>%
+                       rvest::html_node("span.source") %>%
+                       rvest::html_text(),
+                     press_date = press_html %>%
+                       rvest::html_node("span.date") %>%
+                       rvest::html_text() %>%
+                       lubridate::dmy(),
+                     press_description = press_html %>%
+                       rvest::html_node("div.description") %>%
+                       rvest::html_text())}))
+  }
+
+  return(press)
+}
+
+
 #' Get Project
 #'
 #' @param url url of KWB project
@@ -147,48 +183,33 @@ partners <- tibble::tibble(title = title,
   downloads <- if (length(downloads_html) == 0) {
     tibble::tibble(title = title,
                    dl_name = NA_character_,
-                   dl_link =  NA_character_) 
-  } else { 
+                   dl_link =  NA_character_)
+  } else {
     tibble::tibble(title = title,
                    dl_name = downloads_html %>% rvest::html_text(),
                    dl_link =  downloads_html %>% rvest::html_attr("href")
                   )
-    }
-
-  press_htmls <- site %>%
-    rvest::html_node(xpath = "//ul[@class='press-item-grid scrollpopup']") %>%
-    rvest::html_nodes("li")
+  }
 
 
- press <- if(length(press_htmls)==0) {
-   tibble::tibble(title = title,
-                  press_category = NA_character_,
-                  press_title = NA_character_,
-                  press_source = NA_character_,
-                  press_date = NA,
-                  press_description = NA_character_)
-   } else {
-     data.table::rbindlist(lapply(press_htmls, function(press_html) {
-             tibble::tibble(title = title,
-                           press_category = press_html %>%
-                                            rvest::html_attr("data-category"),
-                           press_title = press_html %>%
-                                                        rvest::html_node("h3") %>%
-                                                        rvest::html_text(),
-                           press_source = press_html %>%
-                                                  rvest::html_node("span.source") %>%
-                                                  rvest::html_text(),
-                           press_date = press_html %>%
-                                                   rvest::html_node("span.date") %>%
-                                                   rvest::html_text() %>%
-                                                   lubridate::dmy(),
-                           press_description = press_html %>%
-                                            rvest::html_node("div.description") %>%
-                                            rvest::html_text())}))
-     }
+  max_press_sites <- site %>%
+    rvest::html_node("div.post-nav") %>%
+    rvest::html_attr("data-max-pages") %>%
+    as.numeric()
 
+  press <-   if(is.na(max_press_sites) | max_press_sites <= 1) {
+    get_project_press(site)
+  } else {
+    data.table::rbindlist(lapply(seq_len(max_press_sites), function(id) {
+      press_url <- sprintf("%s/?press-item-paged=%d", url, id)
+      get_project_press(site = xml2::read_html(press_url))}))
+  }
 
+  press$title <- title
 
+  # header_img <- site %>%
+  #   rvest::html_nodes("div") %>%
+  #   rvest::html_attr("style")
 
   infos <- tibble::tibble(title = title,
                           subtitle = site %>%
