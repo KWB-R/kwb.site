@@ -21,7 +21,7 @@ library(kwb.site)
 
 # Tables
 
-```{r}
+```{r echo = FALSE, warning=FALSE}
 # Get project infos from KWB website
 project_infos <- get_projects(debug = FALSE)
 jsonlite::write_json(project_infos, "projects.json")
