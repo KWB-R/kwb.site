@@ -12,9 +12,15 @@
 image: debian:buster-slim
 
 before_script:
+  # Uncomment en_US.UTF-8 for inclusion in generation
+  # make the environment de_DE.UTF-8 configured or parsing of German projects not working
+  - apt-get install -y language-pack-de
+  - export LANG=de_DE.utf8
+  - export LC_ALL=de_DE.utf8
   - apt-get update && apt-get -y install pandoc r-base r-cran-rodbc
   - apt-get -y install libcurl4-openssl-dev libxml2-dev libssl-dev
   - apt-get -y install libv8-dev libudunits2-dev libmagick++-dev
+
   - R -e "install.packages(c('pkgdown','remotes'), repos='http://cran.rstudio.com')"
   - R -e "remotes::install_github('KWB-R/kwb.pkgbuild', dependencies = TRUE, upgrade = 'always')"
   - R -e "remotes::install_github('KWB-R/kwb.site', dependencies = TRUE, upgrade = 'always')"
