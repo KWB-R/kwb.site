@@ -8,6 +8,14 @@
 
 language: r
 sudo: required
+addons:
+  apt:
+    packages:
+      - language-pack-en
+      - language-pack-de
+env:
+  global:
+    - LANG = de_DE.utf8
 cache: packages
 r_packages:
 - remotes
