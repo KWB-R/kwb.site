@@ -17,6 +17,7 @@ env:
   global:
     - LANG=de_DE.utf8
     - LC_ALL=de_DE.utf8
+    - LC_CTYPE=de_DE.utf8
 cache: packages
 r_packages:
 - remotes

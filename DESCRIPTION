@@ -38,7 +38,8 @@ Suggests:
     covr,
     DT,
     knitr,
-    rmarkdown
+    rmarkdown,
+    sessioninfo
 Remotes:
     github::kwb-r/kwb.utils
 VignetteBuilder: 

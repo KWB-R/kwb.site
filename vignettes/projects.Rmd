@@ -147,3 +147,9 @@ plot_gantt_chart_project_by_funder(projects_json = "projects.json",
 ```
 
 [Interactive plot: projects-by-funder_de](../projects-by-funder_de.html)
+
+# Session info 
+
+```{r session_info}
+sessioninfo::session_info()
+```
