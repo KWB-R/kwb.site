@@ -15,7 +15,8 @@ addons:
       - language-pack-de
 env:
   global:
-    - LANG = de_DE.utf8
+    - LANG=de_DE.utf8
+    - LC_ALL=de_DE.utf8
 cache: packages
 r_packages:
 - remotes
