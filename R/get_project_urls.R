@@ -15,18 +15,20 @@
 #' head(project_urls_de)
 #' }
 #'
-get_project_urls <- function(language = "en", debug = TRUE) {
-
+get_project_urls <- function(language = "en", debug = TRUE)
+{
   unique(unlist(lapply(0:9, function(page_number)  {
-    if(page_number == 0) {
-      url <- sprintf("https://www.kompetenz-wasser.de/%s/project/",
-                     language)
-    } else {
-      url <- sprintf("https://www.kompetenz-wasser.de/%s/project/page/%d/",
-                     language,
-                     page_number)
+
+    url <- sprintf("https://www.kompetenz-wasser.de/%s/project/", language)
+
+    if (page_number > 0) {
+      url <- paste0(url, sprintf("page/%d/", page_number))
     }
-    if(debug) message(sprintf("Getting projects from: %s", url))
+
+    if (debug) {
+      message("Getting projects from: ", url)
+    }
+
     url %>%
       xml2::read_html() %>%
       rvest::html_nodes("a") %>%
