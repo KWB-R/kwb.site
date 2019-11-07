@@ -90,6 +90,7 @@ get_project_press <- function(site)
 #' @importFrom stringr str_extract
 #' @importFrom dplyr nest_join
 #' @importFrom data.table rbindlist
+#' @importFrom kwb.utils printIf
 #' @examples
 #' url <- "https://www.kompetenz-wasser.de/en/project/flusshygiene/"
 #' project_info <- get_project(url)
