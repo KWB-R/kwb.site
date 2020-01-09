@@ -4,11 +4,15 @@
 \alias{plot_gantt_chart_project}
 \title{Create KWB Projects Gant Chart}
 \usage{
-
-  plot_gantt_chart_project(projects_json = "https://kwb-r.github.io/kwb.site/projects.json",
-  tag_selection = "department", language_selection = "en",
-  interactive = FALSE, interactive_export = FALSE,
-  interactive_export_dir = ".", alpha = 0.5)
+plot_gantt_chart_project(
+  projects_json = "https://kwb-r.github.io/kwb.site/projects.json",
+  tag_selection = "department",
+  language_selection = "en",
+  interactive = FALSE,
+  interactive_export = FALSE,
+  interactive_export_dir = ".",
+  alpha = 0.5
+)
 }
 \arguments{
 \item{projects_json}{default: "https://kwb-r.github.io/kwb.site/projects.json")}

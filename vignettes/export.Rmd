@@ -1,0 +1,53 @@
+---
+title: "Export JSON data to CSV file"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Projects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+# Select data
+
+Select either German (`projects_de.json`) or English  (`projects_en.json`) JSON data file. In this example 
+the project information in German (`de`) is selected.
+
+```{r}
+library(tidyr)
+
+language <- "de" # "en" for English
+
+projects <- jsonlite::fromJSON(sprintf("https://kwb-r.github.io/kwb.site/projects_%s.json", language)) 
+       
+```
+
+# Tidy data
+
+```{r}
+    
+projects_tidy <- projects %>%  
+  dplyr::mutate(duration_months = ifelse(is.na(duration_months), duration_years * 12, duration_months)) %>% 
+  dplyr::select(title, subtitle, description, budget, date_start, duration_months, language, tags, contacts, funders) %>% 
+  tidyr::unnest(tags) %>% 
+  tidyr::unnest(contacts) %>%  
+  tidyr::unnest(funders)
+```
+
+# Export data 
+
+Exports the data in a CSV file (with *;* as separator) in the current working directory which can be retrieved by calling the function `getwd()` (e.g. ``r getwd()``).
+
+```{r}
+readr::write_csv2(projects_tidy, 
+                  path = sprintf("projects_tidy_%s.csv", language))
+````
+
