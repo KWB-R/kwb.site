@@ -28,13 +28,13 @@ matrix:
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
-#    before_deploy:
-#    - Rscript -e 'remotes::install_cran("pkgdown")'
+    before_deploy:
+    - Rscript -e 'remotes::install_cran("pkgdown")'
 #    - Rscript -e 'remotes::install_github("kwb-r/kwb.pkgbuild@github-actions")'
-#    deploy:
-#      provider: script
-#      script: Rscript -e 'kwb.pkgbuild::deploy_site_github_with_extra_files(vignettes_file_pattern_to_copy = "\\.json$|\\.html$")'
-#      skip_cleanup: 'true'
+    deploy:
+      provider: script
+      script: Rscript -e 'pkgbuild::deploy_site_github()'
+      skip_cleanup: 'true'
       on:
         branch:
         - master
