@@ -36,12 +36,12 @@ jobs:
         run: |
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_dev("pkgdown")
+          remotes::install_github("kwb-r/kwb.pkgbuild@github-actions")
         shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .
 
       - name: Deploy package
-        run: pkgdown::deploy_to_branch()
+        run: kwb.pkgbuild::deploy_to_branch_with_extra_files(vignettes_file_pattern_to_copy = "\\.json$|\\.html$")
         shell: Rscript {0}
