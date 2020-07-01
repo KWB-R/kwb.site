@@ -11,6 +11,9 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      LANG: de_DE.utf8
+      LC_ALL: de_DE.utf8
+      LC_CTYPE: de_DE.utf8
     steps:
       - uses: actions/checkout@v2
 
