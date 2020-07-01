@@ -104,8 +104,11 @@
 
 <span class="kw">language</span> <span class="op">&lt;-</span> <span class="st">"de"</span> <span class="co"># "en" for English</span>
 
-<span class="kw">projects</span> <span class="op">&lt;-</span> <span class="kw">jsonlite</span>::<span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"https://kwb-r.github.io/kwb.site/projects_%s.json"</span>, <span class="kw">language</span>)) 
-       
+<span class="kw">json_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"https://kwb-r.github.io/kwb.site/projects_%s.json"</span>, 
+                         <span class="kw">language</span>)
+
+<span class="kw">projects_clean</span> <span class="op">&lt;-</span> <span class="kw">kwb.site</span>::<span class="fu"><a href="../reference/clean_projects.html">clean_projects</a></span>(<span class="kw">json_path</span>) 
+<span class="co">#&gt; Warning: 36 failed to parse.</span>
 </pre></div>
 </div>
 <div id="tidy-data" class="section level1">
@@ -113,12 +116,16 @@
 <a href="#tidy-data" class="anchor"></a>Tidy data</h1>
 <div class="sourceCode" id="cb2"><pre class="downlit">
     
-<span class="kw">projects_tidy</span> <span class="op">&lt;-</span> <span class="kw">projects</span> <span class="op">%&gt;%</span>  
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(duration_months = <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">duration_months</span>), <span class="kw">duration_years</span> <span class="op">*</span> <span class="fl">12</span>, <span class="kw">duration_months</span>)) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">title</span>, <span class="kw">subtitle</span>, <span class="kw">description</span>, <span class="kw">budget</span>, <span class="kw">date_start</span>, <span class="kw">duration_months</span>, <span class="kw">language</span>, <span class="kw">tags</span>, <span class="kw">contacts</span>, <span class="kw">funders</span>) <span class="op">%&gt;%</span> 
+<span class="kw">projects_tidy</span> <span class="op">&lt;-</span> <span class="kw">projects_clean</span> <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">title</span>, <span class="kw">subtitle</span>, <span class="kw">description</span>, <span class="kw">budget</span>, <span class="kw">date_start</span>, 
+                <span class="kw">duration_total_months</span>, <span class="kw">language</span>, <span class="kw">tags</span>, <span class="kw">contacts</span>, <span class="kw">partners</span>, 
+                <span class="kw">funders</span>, <span class="kw">downloads</span>, <span class="kw">press</span>) <span class="op">%&gt;%</span> 
   <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">tags</span>) <span class="op">%&gt;%</span> 
   <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">contacts</span>) <span class="op">%&gt;%</span>  
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">funders</span>)
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">partners</span>) <span class="op">%&gt;%</span>
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">funders</span>) <span class="op">%&gt;%</span> 
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">downloads</span>) <span class="op">%&gt;%</span> 
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">press</span>)
 </pre></div>
 </div>
 <div id="export-data" class="section level1">
