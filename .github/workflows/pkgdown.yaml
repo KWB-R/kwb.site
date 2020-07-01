@@ -11,9 +11,6 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      LANG: de_DE.utf8
-      LC_ALL: de_DE.utf8
-      LC_CTYPE: de_DE.utf8
     steps:
       - uses: actions/checkout@v2
 
@@ -46,5 +43,7 @@ jobs:
         run: R CMD INSTALL .
 
       - name: Deploy package
-        run: kwb.pkgbuild::deploy_to_branch_with_extra_files(vignettes_file_pattern_to_copy = "\\.json$|\\.html$")
+        run: |
+          Sys.setlocale("de_DE.utf8")
+          kwb.pkgbuild::deploy_to_branch_with_extra_files(vignettes_file_pattern_to_copy = "\\.json$|\\.html$")
         shell: Rscript {0}
