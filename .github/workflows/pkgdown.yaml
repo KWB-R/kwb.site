@@ -34,13 +34,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("pkgdown", "remotes"))
-          remotes::install_github("kwb-r/kwb.pkgbuild@github-actions")
+          install.packages("remotes")
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_dev("pkgdown")
         shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .
 
       - name: Deploy package
-        run: kwb.pkgbuild::deploy_to_branch_with_extra_files(vignettes_file_pattern_to_copy = "\\.json$|\\.html$")
+        run: pkgdown::deploy_to_branch()
         shell: Rscript {0}
