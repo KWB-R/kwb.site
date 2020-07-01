@@ -26,7 +26,10 @@ library(tidyr)
 
 language <- "de" # "en" for English
 
-projects <- jsonlite::fromJSON(sprintf("https://kwb-r.github.io/kwb.site/projects_%s.json", language)) 
+json_path <- sprintf("https://kwb-r.github.io/kwb.site/projects_%s.json", 
+                         language)
+
+projects_clean <- kwb.site::clean_projects(json_path) 
        
 ```
 
@@ -34,9 +37,10 @@ projects <- jsonlite::fromJSON(sprintf("https://kwb-r.github.io/kwb.site/project
 
 ```{r}
     
-projects_tidy <- projects %>%  
-  dplyr::mutate(duration_months = ifelse(is.na(duration_months), duration_years * 12, duration_months)) %>% 
-  dplyr::select(title, subtitle, description, budget, date_start, duration_months, language, tags, contacts, funders) %>% 
+projects_tidy <- projects_clean %>% 
+  kwb.site::clean_projects() %>% 
+  dplyr::select(title, subtitle, description, budget, date_start, 
+                duration_total_months, language, tags, contacts, funders) %>% 
   tidyr::unnest(tags) %>% 
   tidyr::unnest(contacts) %>%  
   tidyr::unnest(funders)

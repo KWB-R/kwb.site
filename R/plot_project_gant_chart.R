@@ -41,13 +41,16 @@ clean_projects <- function(projects_json)
 {
   jsonlite::fromJSON(projects_json, simplifyDataFrame = TRUE) %>%
     dplyr::mutate(
-      duration_months = dplyr::if_else(
-        is.na(.data$duration_months),
-        as.integer(.data$duration_years * 12),
-        .data$duration_months
-      ),
+      duration_total_months = dplyr::if_else(
+        !is.na(.data$duration_years) & !is.na(.data$duration_months),
+        as.integer(.data$duration_years * 12) + as.integer(.data$duration_months),
+        dplyr::if_else(!is.na(.data$duration_years) & is.na(.data$duration_months),
+                       as.integer(.data$duration_years * 12),
+                       dplyr::if_else(!is.na(.data$duration_months),
+                                      as.integer(.data$duration_months),
+                                      NA_integer_))),
       date_start = lubridate::dmy(.data$date_start),
-      date_end = .data$date_start + months(.data$duration_months+1) - 1,
+      date_end = .data$date_start + months(.data$duration_total_months+1) - 1,
       id = extract_project_ids(.data$title)$id
     )
 }
@@ -127,7 +130,7 @@ plot_gantt_chart_project <- function(
       .data$id,
       .data$date_start,
       .data$date_end,
-      .data$duration_months
+      .data$duration_total_months
     ))
 
   n_per_tag <- projects_gant %>%
