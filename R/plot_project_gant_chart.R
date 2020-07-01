@@ -258,7 +258,7 @@ plot_gantt_chart_project_by_funder <- function(
         .data$id,
         .data$date_start,
         .data$date_end,
-        .data$duration_months
+        .data$duration_total_months
       )
     )
 
