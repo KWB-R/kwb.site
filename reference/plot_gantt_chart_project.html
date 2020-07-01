@@ -95,9 +95,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/export.html">Export JSON data to CSV file</a>
-    </li>
-    <li>
       <a href="../articles/projects.html">Projects</a>
     </li>
   </ul>
@@ -135,15 +132,10 @@
     <p>Create KWB Projects Gant Chart</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_gantt_chart_project</span>(
-  projects_json = <span class='st'>"https://kwb-r.github.io/kwb.site/projects.json"</span>,
-  tag_selection = <span class='st'>"department"</span>,
-  language_selection = <span class='st'>"en"</span>,
-  interactive = <span class='fl'>FALSE</span>,
-  interactive_export = <span class='fl'>FALSE</span>,
-  interactive_export_dir = <span class='st'>"."</span>,
-  alpha = <span class='fl'>0.5</span>
-)</pre>
+    <pre class="usage"><span class='fu'>plot_gantt_chart_project</span>(<span class='kw'>projects_json</span> <span class='kw'>=</span> <span class='st'>"https://kwb-r.github.io/kwb.site/projects.json"</span>,
+  <span class='kw'>tag_selection</span> <span class='kw'>=</span> <span class='st'>"department"</span>, <span class='kw'>language_selection</span> <span class='kw'>=</span> <span class='st'>"en"</span>,
+  <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>interactive_export</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>interactive_export_dir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,12 +177,12 @@ default: "."</p></td>
     <p>KWB projects gant chart</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>projects_by_department_en</span> <span class='op'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>()
-<span class='fu'>plot_project_gant_chart</span>(interactive = <span class='fl'>TRUE</span>)
-<span class='kw'>projects_by_department_de</span> <span class='op'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>(language_selection = <span class='st'>"de"</span>)
-<span class='kw'>projects_by_topic_en</span> <span class='op'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>(tag_selection = <span class='st'>"topic"</span>)
-<span class='kw'>projects_by_topic_de</span> <span class='op'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>(tag_selection = <span class='st'>"topic"</span>, language_selection = <span class='st'>"de"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>projects_by_department_en</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>()
+<span class='fu'>plot_project_gant_chart</span>(<span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>projects_by_department_de</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>(<span class='kw'>language_selection</span> <span class='kw'>=</span> <span class='st'>"de"</span>)
+<span class='no'>projects_by_topic_en</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>(<span class='kw'>tag_selection</span> <span class='kw'>=</span> <span class='st'>"topic"</span>)
+<span class='no'>projects_by_topic_de</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_project_gant_chart</span>(<span class='kw'>tag_selection</span> <span class='kw'>=</span> <span class='st'>"topic"</span>, <span class='kw'>language_selection</span> <span class='kw'>=</span> <span class='st'>"de"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -207,7 +199,7 @@ default: "."</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
