@@ -38,12 +38,15 @@ projects_clean <- kwb.site::clean_projects(json_path)
 ```{r}
     
 projects_tidy <- projects_clean %>% 
-  kwb.site::clean_projects() %>% 
   dplyr::select(title, subtitle, description, budget, date_start, 
-                duration_total_months, language, tags, contacts, funders) %>% 
+                duration_total_months, language, tags, contacts, partners, 
+                funders, downloads, press) %>% 
   tidyr::unnest(tags) %>% 
   tidyr::unnest(contacts) %>%  
-  tidyr::unnest(funders)
+  tidyr::unnest(partners) %>%
+  tidyr::unnest(funders) %>% 
+  tidyr::unnest(downloads) %>% 
+  tidyr::unnest(press)
 ```
 
 # Export data 
