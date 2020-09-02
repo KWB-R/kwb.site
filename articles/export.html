@@ -99,43 +99,36 @@
 <h1 class="hasAnchor">
 <a href="#select-data" class="anchor"></a>Select data</h1>
 <p>Select either German (<code>projects_de.json</code>) or English (<code>projects_en.json</code>) JSON data file. In this example the project information in German (<code>de</code>) is selected.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tidyr.tidyverse.org">tidyr</a></span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
 
-<span class="kw">language</span> <span class="op">&lt;-</span> <span class="st">"de"</span> <span class="co"># "en" for English</span>
+<span class="no">language</span> <span class="kw">&lt;-</span> <span class="st">"de"</span> <span class="co"># "en" for English</span>
 
-<span class="kw">json_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"https://kwb-r.github.io/kwb.site/projects_%s.json"</span>, 
-                         <span class="kw">language</span>)
+<span class="no">json_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"https://kwb-r.github.io/kwb.site/projects_%s.json"</span>,
+                         <span class="no">language</span>)
 
-<span class="kw">projects_clean</span> <span class="op">&lt;-</span> <span class="kw">kwb.site</span>::<span class="fu"><a href="../reference/clean_projects.html">clean_projects</a></span>(<span class="kw">json_path</span>) 
-       
-</pre></div>
+<span class="no">projects_clean</span> <span class="kw">&lt;-</span> <span class="kw pkg">kwb.site</span><span class="kw ns">::</span><span class="fu"><a href="../reference/clean_projects.html">clean_projects</a></span>(<span class="no">json_path</span>)</pre></body></html></div>
 </div>
 <div id="tidy-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tidy-data" class="anchor"></a>Tidy data</h1>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-    
-<span class="kw">projects_tidy</span> <span class="op">&lt;-</span> <span class="kw">projects_clean</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">title</span>, <span class="kw">subtitle</span>, <span class="kw">description</span>, <span class="kw">budget</span>, <span class="kw">date_start</span>, 
-                <span class="kw">duration_total_months</span>, <span class="kw">language</span>, <span class="kw">tags</span>, <span class="kw">contacts</span>, <span class="kw">partners</span>, 
-                <span class="kw">funders</span>, <span class="kw">downloads</span>, <span class="kw">press</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">tags</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">contacts</span>) <span class="op">%&gt;%</span>  
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">partners</span>) <span class="op">%&gt;%</span>
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">funders</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">downloads</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">press</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r">
+<span class="no">projects_tidy</span> <span class="kw">&lt;-</span> <span class="no">projects_clean</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">title</span>, <span class="no">subtitle</span>, <span class="no">description</span>, <span class="no">budget</span>, <span class="no">date_start</span>,
+                <span class="no">duration_total_months</span>, <span class="no">language</span>, <span class="no">tags</span>, <span class="no">contacts</span>, <span class="no">partners</span>,
+                <span class="no">funders</span>, <span class="no">downloads</span>, <span class="no">press</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">tags</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">contacts</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">partners</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">funders</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">downloads</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">press</span>)</pre></body></html></div>
 </div>
 <div id="export-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#export-data" class="anchor"></a>Export data</h1>
-<p>Exports the data in a CSV file (with <em>;</em> as separator) in the current working directory which can be retrieved by calling the function <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> (e.g. <code>/Users/runner/runners/2.169.1/work/kwb.site/kwb.site/vignettes</code>).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">readr</span>::<span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv2</a></span>(<span class="kw">projects_tidy</span>, 
-                  path = <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"projects_tidy_%s.csv"</span>, <span class="kw">language</span>))
-</pre></div>
+<p>Exports the data in a CSV file (with <em>;</em> as separator) in the current working directory which can be retrieved by calling the function <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> (e.g. <code>/Users/runner/work/kwb.site/kwb.site/vignettes</code>).</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv2</a></span>(<span class="no">projects_tidy</span>,
+                  <span class="kw">path</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"projects_tidy_%s.csv"</span>, <span class="no">language</span>))</pre></body></html></div>
 </div>
   </div>
 
@@ -154,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
