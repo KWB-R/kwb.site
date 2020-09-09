@@ -42,8 +42,8 @@ get_team_html <- function(url =  "https://www.kompetenz-wasser.de/de/ueber-uns/t
       position_href <- position_html %>%  rvest::html_attr("href")
       position_title <- position_html %>%  rvest::html_text()
 
-      position <- list(tibble::tibble(title = position_title,
-                      href = position_href))
+      position <- list(tibble::tibble(position_title = position_title,
+                      position_href = position_href))
 
       email <- x %>%  rvest::html_node("a.email-link") %>%
         rvest::html_text(trim = TRUE)
@@ -54,9 +54,9 @@ get_team_html <- function(url =  "https://www.kompetenz-wasser.de/de/ueber-uns/t
 
 
       competence <- NA_character_
-      projects <- list(tibble::tibble("title" = NA_character_,
-                                      "url" = NA_character_,
-                                      "id" = NA_character_))
+      projects <- list(tibble::tibble("prj_title" = NA_character_,
+                                      "prj_url" = NA_character_,
+                                      "prj_id" = NA_character_))
 
 
       has_details <- !is.na(rvest::html_node(x,"label.open-details-button"))
@@ -88,9 +88,9 @@ get_team_html <- function(url =  "https://www.kompetenz-wasser.de/de/ueber-uns/t
        rvest::html_nodes("a.project") %>%
        rvest::html_attr("href")
 
-     projects <- list(tibble::tibble("title" = projects_title,
-                     "url" = projects_url,
-                     "id" = basename(projects_url)))
+     projects <- list(tibble::tibble("prj_title" = projects_title,
+                     "prj_url" = projects_url,
+                     "prj_id" = basename(projects_url)))
 
      }
       }
@@ -127,3 +127,4 @@ get_team_html <- function(url =  "https://www.kompetenz-wasser.de/de/ueber-uns/t
  team_de <- get_persons(url = "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/", rs)
  team_en <- get_persons(url = "https://www.kompetenz-wasser.de/en/ueber-uns/team-2/", rs)
 
+team_de %>% tidyr::unnest(projects)
