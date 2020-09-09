@@ -95,9 +95,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/export.html">Export JSON data to CSV file</a>
-    </li>
-    <li>
       <a href="../articles/projects.html">Projects</a>
     </li>
   </ul>
@@ -135,7 +132,7 @@
     <p>Get Project</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_project</span>(<span class='no'>url</span>, <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_project</span>(<span class='kw'>url</span>, debug = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,9 +152,11 @@
     <p>tibble with project infos</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='st'>"https://www.kompetenz-wasser.de/en/project/flusshygiene/"</span>
-<span class='no'>project_info</span> <span class='kw'>&lt;-</span> <span class='fu'>get_project</span>(<span class='no'>url</span>)</div><div class='output co'>#&gt; url:
-#&gt; [1] "https://www.kompetenz-wasser.de/en/project/flusshygiene/"</div><div class='output co'>#&gt; <span class='warning'>Warning: All formats failed to parse. No formats found.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>project_info</span>)</div><div class='output co'>#&gt; tibble [1 × 15] (S3: tbl_df/tbl/data.frame)
+    <pre class="examples"><div class='input'><span class='kw'>url</span> <span class='op'>&lt;-</span> <span class='st'>"https://www.kompetenz-wasser.de/en/project/flusshygiene/"</span>
+<span class='kw'>project_info</span> <span class='op'>&lt;-</span> <span class='fu'>get_project</span>(<span class='kw'>url</span>)
+</div><div class='output co'>#&gt; url:
+#&gt; [1] "https://www.kompetenz-wasser.de/en/project/flusshygiene/"</div><div class='output co'>#&gt; <span class='warning'>Warning: All formats failed to parse. No formats found.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>project_info</span>)
+</div><div class='output co'>#&gt; tibble [1 × 15] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ title          : chr "Hygienically Relevant Microorganisms and Pathogens in Multifunctional Water Bodies and Hydrologic Circles (FLUSSHYGIENE)"
 #&gt;  $ subtitle       : chr "Sustainable management of different types of water bodies in Germany"
 #&gt;  $ description    : chr "Project ObjectivesThe objective of the project FLUSSHYGIENE is to gain a clearer understanding of the entry pat"| __truncated__
@@ -210,7 +209,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
