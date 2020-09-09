@@ -1,62 +1,40 @@
 if(FALSE) {
-  rs_serverclient <- RSelenium::rsDriver(browser = "firefox", geckover = "0.25.0")
-  rs <- rs_serverclient$client
 
-  rs$open()
-  rs$navigate("https://www.kompetenz-wasser.de/de/ueber-uns/team-2/")
+library(rvest)
+
+get_team_html <- function(url =  "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/",
+                          rs) {
 
 
 
-  cookie <- rs$findElement(using = "xpath", value = '//*[@id="cn-accept-cookie"]')
+  rs$client$open()
+  rs$client$navigate(url)
+
+  cookie <- rs$client$findElement(using = "xpath", value = '//*[@id="cn-accept-cookie"]')
   message("Click on cookie")
   cookie$clickElement()
     for(i in 1:4) {
-      button_loadmore <- rs$findElement(using = "xpath", value = "//button[@class='load-more']")
+      button_loadmore <- rs$client$findElement(using = "xpath", value = "//button[@class='load-more']")
       button_loadmore$clickElement()
       Sys.sleep(3)
     }
 
-  button_opendetails <- rs$findElements(using = "xpath", value = '//*[contains(concat( " ", @class, " " ), concat( " ", "open-hidden-smooth-button", " " ))]')
+  button_opendetails <- rs$client$findElements(using = "xpath", value = '//*[contains(concat( " ", @class, " " ), concat( " ", "open-hidden-smooth-button", " " ))]')
 
   sapply( button_opendetails, function(x) x$clickElement())
 
+  team_html <- xml2::read_html(rs$client$getPageSource()[[1]])
+  rs$client$close()
+  team_html
+}
 
-
-  library(rvest)
-  team_html <- xml2::read_html(rs$getPageSource()[[1]])
-  team <- team_html %>%
-    rvest::html_nodes("li.employee-item")
-
-
-  avatar_url <- team_html %>%
-    rvest::html_nodes("div.headshot") %>%
-    rvest::html_nodes("img") %>%
-    rvest::html_attr("src")
-
-
-
-
-  team_df <- tibble::tibble(avatar_url = avatar_url,
-                            title = title,
-                            position = position,
-                            email = email,
-                            phone = phone)
-
-  competence_titles <- team_html %>%
-    rvest::html_nodes(css = "div.competence-list.row") %>%
-    rvest::html_nodes("div.label") %>%
-    rvest::html_text()
-
-
-   for(i in 1) {
-      x <- team[i]
+ get_person <- function(x) {
       avatar_url <- x %>%
       rvest::html_node("div.headshot") %>%
       rvest::html_node("img") %>%
       rvest::html_attr("src")
 
-      title <- x %>%  rvest::html_node(xpath = '//*[(@id = "employee-grid")]//*[contains(concat( " ", @class, " " ), concat( " ", "hyphenate", " " ))]') %>%
-        rvest::html_text(trim = TRUE)
+      title <- x %>%  rvest::html_node("h3") %>% rvest::html_text(trim = TRUE)
 
 
       position_html <- x %>%  rvest::html_node(css = "div.position-list.row") %>% rvest::html_nodes("a.filter")
@@ -67,13 +45,24 @@ if(FALSE) {
       position <- list(tibble::tibble(title = position_title,
                       href = position_href))
 
-      email <- x %>%  rvest::html_node(xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "email-link", " " ))]') %>%
+      email <- x %>%  rvest::html_node("a.email-link") %>%
         rvest::html_text(trim = TRUE)
 
 
-      phone <- x %>%  rvest::html_node(xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "phone-link", " " ))]') %>%
+      phone <- x %>%  rvest::html_node("a.phone-link") %>%
         rvest::html_attr("href")
 
+
+      competence <- NA_character_
+      projects <- list(tibble::tibble("title" = NA_character_,
+                                      "url" = NA_character_,
+                                      "id" = NA_character_))
+
+
+      has_details <- !is.na(rvest::html_node(x,"label.open-details-button"))
+
+
+      if (has_details) {
 
      competence_title <- x %>%
        rvest::html_node(css = "div.competence-list.row") %>%
@@ -87,6 +76,8 @@ if(FALSE) {
 
      competence <- stringr::str_remove_all(competence_full, competence_title[1]) %>% stringr::str_trim()
 
+     has_projects <- !is.na(x %>% rvest::html_node(css = "div.projects.row"))
+     if (has_projects) {
      projects_title <- x %>%
        rvest::html_node(css = "div.projects.row") %>%
        rvest::html_node("div.label") %>%
@@ -101,7 +92,10 @@ if(FALSE) {
                      "url" = projects_url,
                      "id" = basename(projects_url)))
 
-    x_df <-  tibble::tibble(
+     }
+      }
+
+    tibble::tibble(
        avatar_url = avatar_url,
        title = title,
        position = position,
@@ -110,14 +104,26 @@ if(FALSE) {
        competence = competence,
        projects = projects)
 
-    x_df$projects
-
-    team %>%
-      rvest::html_nodes("div.employee-details") %>%
-      rvest::html_nodes("title") %>%
-      rvest::html_text()
-
-    team %>%  html_node("headshot")
-
-
 }
+
+
+ get_persons <- function(url = "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/",
+                         rs) {
+
+   team_html <- get_team_html(url, rs)
+
+   team <- team_html %>%
+     rvest::html_nodes("li.employee-item")
+
+
+   lapply(team, function(x) get_person(x)) %>%
+     dplyr::bind_rows()
+
+ }
+
+
+ rs <- RSelenium::rsDriver(browser = "firefox", geckover = "0.25.0")
+
+ team_de <- get_persons(url = "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/", rs)
+ team_en <- get_persons(url = "https://www.kompetenz-wasser.de/en/ueber-uns/team-2/", rs)
+
