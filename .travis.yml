@@ -22,6 +22,10 @@ cache: packages
 r_packages:
 - remotes
 - covr
+before_install:
+- svn checkout https://github.com/SeleniumHQ/selenium/trunk/common/src/web
+- docker run -d -p 3000:8080 --name http-server -v $(pwd)/web:/public danjellz/http-server &
+- docker run -d -p 127.0.0.1:4444:4444 -v /dev/shm:/dev/shm --link http-server selenium/standalone-firefox:3.141.59
 matrix:
   include:
   - r: devel

@@ -1,0 +1,78 @@
+---
+title: "Team"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Team}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(kwb.site)
+is_gh_actions <- ifelse(identical(Sys.getenv("CI"), "true"), TRUE, FALSE)
+is_travis <- ifelse(identical(Sys.getenv("TRAVIS"), "true"), TRUE, FALSE)
+```
+
+
+# Scrape team infos
+
+
+```{r echo = TRUE, eval = is_gh_actions, warning=FALSE}
+rs <- RSelenium::remoteDriver() 
+```
+```{r echo = !is_gh_actions, eval = FALSE, warning=FALSE}
+rs <- kwb.site::rs_connect() 
+```
+
+```{r echo = TRUE, eval=is_gh_actions, warning=FALSE}
+
+team_de <- kwb.site::get_team(url = "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/", rs)
+team_en <- kwb.site::get_team(url = "https://www.kompetenz-wasser.de/en/ueber-uns/team-2/", rs)
+
+
+```
+
+
+
+
+## English
+
+```{r eval=is_gh_actions}
+
+
+jsonlite::write_json(team_en, "team_en.json")
+
+DT::datatable(team_de)
+
+```
+
+For `r if(exists(teams_en) {nrow(team_en)}` KWB team members the information is available in English.
+
+
+## German
+
+```{r eval=is_gh_actions}
+
+jsonlite::write_json(team_de, "team_de.json")
+
+DT::datatable(team_de)
+
+
+```
+
+For `r if(exists(teams_de) {nrow(teams_de)}` KWB team members the information is available in German.
+
+
+
+# Session info 
+
+```{r session_info}
+sessioninfo::session_info()
+```
