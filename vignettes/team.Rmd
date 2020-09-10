@@ -27,11 +27,11 @@ is_travis <- ifelse(identical(Sys.getenv("TRAVIS"), "true"), TRUE, FALSE)
 ```{r echo = TRUE, eval = is_gh_actions, warning=FALSE}
 rs <- RSelenium::remoteDriver() 
 ```
-```{r echo = !is_gh_actions, eval = FALSE, warning=FALSE}
+```{r echo = !is_travis, eval = FALSE, warning=FALSE}
 rs <- kwb.site::rs_connect() 
 ```
 
-```{r echo = TRUE, eval=is_gh_actions, warning=FALSE}
+```{r echo = TRUE, eval=is_travis, warning=FALSE}
 
 team_de <- kwb.site::get_team(url = "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/", rs)
 team_en <- kwb.site::get_team(url = "https://www.kompetenz-wasser.de/en/ueber-uns/team-2/", rs)
@@ -44,7 +44,7 @@ team_en <- kwb.site::get_team(url = "https://www.kompetenz-wasser.de/en/ueber-un
 
 ## English
 
-```{r eval=is_gh_actions}
+```{r eval=is_travis}
 
 
 jsonlite::write_json(team_en, "team_en.json")
@@ -58,7 +58,7 @@ For `r if(exists(teams_en)) {nrow(team_en)}` KWB team members the information is
 
 ## German
 
-```{r eval=is_gh_actions}
+```{r eval=is_travis}
 
 jsonlite::write_json(team_de, "team_de.json")
 
