@@ -53,7 +53,7 @@ DT::datatable(team_de)
 
 ```
 
-For `r if(exists(teams_en) {nrow(team_en)}` KWB team members the information is available in English.
+For `r if(exists(teams_en)) {nrow(team_en)}` KWB team members the information is available in English.
 
 
 ## German
@@ -67,7 +67,7 @@ DT::datatable(team_de)
 
 ```
 
-For `r if(exists(teams_de) {nrow(teams_de)}` KWB team members the information is available in German.
+For `r if(exists(teams_de)) {nrow(teams_de)}` KWB team members the information is available in German.
 
 
 
