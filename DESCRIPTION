@@ -39,6 +39,7 @@ Suggests:
     covr,
     DT,
     knitr,
+    tidyr,
     readr,
     rmarkdown,
     sessioninfo
