@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Project — get_project • kwb.site</title>
+<title>Get Team HTML — get_team_html • kwb.site</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get Project — get_project" />
-<meta property="og:description" content="Get Project" />
+<meta property="og:title" content="Get Team HTML — get_team_html" />
+<meta property="og:description" content="Get Team HTML" />
 
 
 
@@ -129,77 +129,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Project</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/kwb.site/blob/master/R/get_project.R'><code>R/get_project.R</code></a></small>
-    <div class="hidden name"><code>get_project.Rd</code></div>
+    <h1>Get Team HTML</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/kwb.site/blob/master/R/get_team.R'><code>R/get_team.R</code></a></small>
+    <div class="hidden name"><code>get_team_html.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get Project</p>
+    <p>Get Team HTML</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_project</span>(<span class='kw'>url</span>, debug = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_team_html</span>(url = <span class='st'>"https://www.kompetenz-wasser.de/de/ueber-uns/team-2/"</span>, <span class='kw'>rs</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>url</th>
-      <td><p>url of KWB project</p></td>
+      <td><p>url to team site (default:  "https://www.kompetenz-wasser.de/de/ueber-uns/team-2/")</p></td>
     </tr>
     <tr>
-      <th>debug</th>
-      <td><p>print debug messages (default: TRUE)</p></td>
+      <th>rs</th>
+      <td><p>connection to RSelenium (kwb.site::rs_connect())</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tibble with project infos</p>
+    <p>html source code of team website (after clicking "load-more" and
+"open-details" buttons)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>url</span> <span class='op'>&lt;-</span> <span class='st'>"https://www.kompetenz-wasser.de/en/project/flusshygiene/"</span>
-<span class='kw'>project_info</span> <span class='op'>&lt;-</span> <span class='fu'>get_project</span>(<span class='kw'>url</span>)
-</div><div class='output co'>#&gt; url:
-#&gt; [1] "https://www.kompetenz-wasser.de/en/project/flusshygiene/"</div><div class='output co'>#&gt; <span class='warning'>Warning: All formats failed to parse. No formats found.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>project_info</span>)
-</div><div class='output co'>#&gt; tibble [1 × 15] (S3: tbl_df/tbl/data.frame)
-#&gt;  $ title          : chr "Hygienically Relevant Microorganisms and Pathogens in Multifunctional Water Bodies and Hydrologic Circles (FLUSSHYGIENE)"
-#&gt;  $ subtitle       : chr "Sustainable management of different types of water bodies in Germany"
-#&gt;  $ description    : chr "Project ObjectivesThe objective of the project FLUSSHYGIENE is to gain a clearer understanding of the entry pat"| __truncated__
-#&gt;  $ budget         : chr "2.79 Mio. € (total)"
-#&gt;  $ date_start     : chr "1. June 2015"
-#&gt;  $ duration_years : int NA
-#&gt;  $ duration_months: int 48
-#&gt;  $ url            : chr "https://www.kompetenz-wasser.de/en/project/flusshygiene/"
-#&gt;  $ language       : chr "en"
-#&gt;  $ tags           :List of 1
-#&gt;   ..$ : tibble [5 × 1] (S3: tbl_df/tbl/data.frame)
-#&gt;   .. ..$ tags: chr [1:5] "Urban Systems Unit" "Digitisation" "Water Pollution Control" "Infrastructure" ...
-#&gt;  $ contacts       :List of 1
-#&gt;   ..$ : tibble [2 × 4] (S3: tbl_df/tbl/data.frame)
-#&gt;   .. ..$ degree    : chr [1:2] "Dr.-Ing." "Dipl.-Ing."
-#&gt;   .. ..$ first_name: chr [1:2] "Pascale" "Wolfgang"
-#&gt;   .. ..$ last_name : chr [1:2] "Rouault" "Seis"
-#&gt;   .. ..$ email     : chr [1:2] "pascale.rouault@kompetenz-wasser.de" "wolfgang.seis@kompetenz-wasser.de"
-#&gt;  $ partners       :List of 1
-#&gt;   ..$ : tibble [1 × 1] (S3: tbl_df/tbl/data.frame)
-#&gt;   .. ..$ partner_url: chr "https://www.kompetenz-wasser.de/wp-content/uploads/2018/11/logos_partner_flusshygiene_neu.jpg"
-#&gt;  $ funders        :List of 1
-#&gt;   ..$ : tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
-#&gt;   .. ..$ funder_logo_url: chr [1:3] "https://www.kompetenz-wasser.de/wp-content/uploads/2017/05/mbf-logo-118x70.png" "https://www.kompetenz-wasser.de/wp-content/uploads/2017/05/logo_nawam_rewam-120x27.jpg" "https://www.kompetenz-wasser.de/wp-content/uploads/2017/05/logo_fona-120x70.jpg"
-#&gt;   .. ..$ funder_id      : chr [1:3] "bmbf" "" ""
-#&gt;  $ downloads      :List of 1
-#&gt;   ..$ : tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
-#&gt;   .. ..$ dl_name: chr [1:3] "Download Fact Sheet" "Press release 2015" "Press release"
-#&gt;   .. ..$ dl_link: chr [1:3] "https://www.kompetenz-wasser.de/wp-content/uploads/2017/05/flusshygiene_e_factsheet_06032017.pdf" "https://www.kompetenz-wasser.de/wp-content/uploads/2017/05/pm_flusshygiene_fin.pdf" "https://www.kompetenz-wasser.de/wp-content/uploads/2017/05/170420_pm_flusshygiene_kwb_fin1.pdf"
-#&gt;  $ press          :List of 1
-#&gt;   ..$ : tibble [24 × 5] (S3: tbl_df/tbl/data.frame)
-#&gt;   .. ..$ press_category   : chr [1:24] "kwb-in-den-medien" "kwb-in-den-medien" "kwb-in-den-medien" "kwb-in-den-medien" ...
-#&gt;   .. ..$ press_title      : chr [1:24] "Digitalisierung hilft, die Ressource Wasser für die Zukunft zu sichern" "Verleihung von AQUA AWARD und AQUA SCIENCE AWARD am 18. Mai in Berlin" "New Early Warning System for Bathing Water Areas" "Finale des Projekts Flusshygiene" ...
-#&gt;   .. ..$ press_source     : chr [1:24] "Technologiestiftung Berlin" "openPR" "springerprofessional.de" "wwt wasserwirtschaft wassertechnik, 1-2, 2019" ...
-#&gt;   .. ..$ press_date       : Date[1:24], format: "2019-06-04" "2019-05-07" ...
-#&gt;   .. ..$ press_description: chr [1:24] "Die Digitalisierung der Wasserver- und –entsortung bietet viele Chancen. Ein Interview mit Edith Roßbach, Gesch"| __truncated__ "Mitwirkende in der Jury für den AQUA AWARD und den AQUA SCIENCE AWARD waren und sind u.a. Vertreter*innen folge"| __truncated__ "Urban river bathing sites are to experience a renaissance, prevented however, by changing hygienic quality of t"| __truncated__ "Im Novemeber 2018 endete mit einem Abschlussworkshop das Verbundvorhaben FLUSSHYGIENE offiziell. Die Forschungs"| __truncated__ ...
-#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </div></pre>
+    <pre class="examples"><div class='input'> <span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+ <span class='kw'>rs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rs_connect.html'>rs_connect</a></span>(browser = <span class='st'>"firefox"</span>, geckover = <span class='st'>"0.25.0"</span>)
+ <span class='kw'>team_html</span> <span class='op'>&lt;-</span> <span class='kw'>kwb.site</span>::<span class='fu'>get_team_html</span>(rs = <span class='kw'>rs</span>)
+ <span class='kw'>team_html</span>
+ }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

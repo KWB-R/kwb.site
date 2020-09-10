@@ -95,7 +95,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/export.html">Export JSON data to CSV file</a>
+    </li>
+    <li>
       <a href="../articles/projects.html">Projects</a>
+    </li>
+    <li>
+      <a href="../articles/team.html">Team</a>
     </li>
   </ul>
 </li>
@@ -132,10 +138,15 @@
     <p>Create KWB Projects Gant Chart</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_gantt_chart_project</span>(projects_json = <span class='st'>"https://kwb-r.github.io/kwb.site/projects.json"</span>,
-  tag_selection = <span class='st'>"department"</span>, language_selection = <span class='st'>"en"</span>,
-  interactive = <span class='fl'>FALSE</span>, interactive_export = <span class='fl'>FALSE</span>,
-  interactive_export_dir = <span class='st'>"."</span>, alpha = <span class='fl'>0.5</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_gantt_chart_project</span>(
+  projects_json = <span class='st'>"https://kwb-r.github.io/kwb.site/projects.json"</span>,
+  tag_selection = <span class='st'>"department"</span>,
+  language_selection = <span class='st'>"en"</span>,
+  interactive = <span class='fl'>FALSE</span>,
+  interactive_export = <span class='fl'>FALSE</span>,
+  interactive_export_dir = <span class='st'>"."</span>,
+  alpha = <span class='fl'>0.5</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
