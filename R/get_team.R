@@ -35,7 +35,12 @@ get_team_html <- function(url =  "https://www.kompetenz-wasser.de/de/ueber-uns/t
   cookie <- rs$findElement(using = "xpath", value = '//*[@id="cn-accept-cookie"]')
   message("Click on cookie")
   cookie$clickElement()
-    for(i in 1:4) {
+  i <- 0
+    while(attr(try(rs$findElement(using = "xpath",
+                                  value = "//button[@class='load-more']"),
+                   silent = TRUE),
+               "class")!="try-error") {
+      i <- i + 1
       button_loadmore <- rs$findElement(using = "xpath", value = "//button[@class='load-more']")
       message(sprintf("Click on load more button: %d", i))
       button_loadmore$clickElement()
