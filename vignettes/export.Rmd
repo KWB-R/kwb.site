@@ -2,7 +2,7 @@
 title: "Export JSON data to CSV file"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Export}
+  %\VignetteIndexEntry{Export JSON data to CSV file}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
