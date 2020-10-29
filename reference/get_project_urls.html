@@ -100,9 +100,6 @@
     <li>
       <a href="../articles/projects.html">Projects</a>
     </li>
-    <li>
-      <a href="../articles/team.html">Team</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -138,7 +135,7 @@
     <p>Get Project URLs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_project_urls</span>(language = <span class='st'>"en"</span>, debug = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_project_urls</span><span class='op'>(</span>language <span class='op'>=</span> <span class='st'>"en"</span>, debug <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,17 +155,17 @@
     <p>character vector with project urls</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>project_urls_en</span> <span class='op'>&lt;-</span> <span class='fu'>get_project_urls</span>(<span class='st'>"en"</span>)
-</div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/1/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/2/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/3/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/4/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/5/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/6/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/7/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/8/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/9/</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>project_urls_en</span>)
-</div><div class='output co'>#&gt; [1] "https://www.kompetenz-wasser.de/en/project/r-rhenania/"
-#&gt; [2] "https://www.kompetenz-wasser.de/en/project/gruenesgas/"
-#&gt; [3] "https://www.kompetenz-wasser.de/en/project/ultimate/"  
+    <pre class="examples"><div class='input'><span class='va'>project_urls_en</span> <span class='op'>&lt;-</span> <span class='fu'>get_project_urls</span><span class='op'>(</span><span class='st'>"en"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/1/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/2/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/3/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/4/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/5/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/6/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/7/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/8/</span></div><div class='output co'>#&gt; <span class='message'>Getting projects from: https://www.kompetenz-wasser.de/en/project/page/9/</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>project_urls_en</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "https://www.kompetenz-wasser.de/en/project/ultimate/"  
+#&gt; [2] "https://www.kompetenz-wasser.de/en/project/r-rhenania/"
+#&gt; [3] "https://www.kompetenz-wasser.de/en/project/gruenesgas/"
 #&gt; [4] "https://www.kompetenz-wasser.de/en/project/spur/"      
 #&gt; [5] "https://www.kompetenz-wasser.de/en/project/mbr40/"     
 #&gt; [6] "https://www.kompetenz-wasser.de/en/project/nasri/"     </div><div class='input'>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) <span class='kw'>project_urls_de</span> <span class='op'>&lt;-</span> <span class='fu'>get_project_urls</span>(<span class='st'>"de"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>project_urls_de</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in head(project_urls_de): object 'project_urls_de' not found</span></div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='va'>project_urls_de</span> <span class='op'>&lt;-</span> <span class='fu'>get_project_urls</span><span class='op'>(</span><span class='st'>"de"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>project_urls_de</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(project_urls_de): Objekt 'project_urls_de' nicht gefunden</span></div><div class='input'>
 
 </div></pre>
   </div>
@@ -186,7 +183,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

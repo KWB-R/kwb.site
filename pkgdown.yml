@@ -1,6 +1,8 @@
-pandoc: '2.2'
-pkgdown: 1.6.0
+pandoc: 2.7.3
+pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: []
-last_built: 2020-09-11T07:09Z
+articles:
+  export: export.html
+  projects: projects.html
+last_built: 2020-10-29T11:14Z
 
