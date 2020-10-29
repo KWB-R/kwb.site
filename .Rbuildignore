@@ -10,3 +10,4 @@ R/\.init_package\.R$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^\.github$
