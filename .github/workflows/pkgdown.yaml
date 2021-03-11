@@ -7,7 +7,7 @@ on:
     # * is a special character in YAML so you have to quote this string
     # Run this job every day at 05:00 a.m UTC ('0 5 * * *')
     - cron:  '0 5 * * *'
-    
+
 name: pkgdown
 
 jobs:
@@ -55,5 +55,5 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          Rscript -e 'kwb.pkgbuild::deploy_to_branch_with_extra_files()'
+          Rscript -e 'Rscript -e 'kwb.pkgbuild::deploy_to_branch_with_extra_files(vignettes_file_pattern_to_copy = "\\\.json$|\\\.html$")'
         shell: Rscript {0}
