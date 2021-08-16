@@ -1,8 +1,9 @@
-[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/dlw7m5o8dtnjjqt9?svg=true)](https://ci.appveyor.com/project/KWB-R/kwb-site)
-[![Travis build Status](https://travis-ci.org/KWB-R/kwb.site.svg?branch=master)](https://travis-ci.org/KWB-R/kwb.site)
+[![R-CMD-check](https://github.com/KWB-R/kwb.site/workflows/R-CMD-check/badge.svg)](https://github.com/KWB-R/kwb.site/actions?query=workflow%3AR-CMD-check)
+[![pkgdown](https://github.com/KWB-R/kwb.site/workflows/pkgdown/badge.svg)](https://github.com/KWB-R/kwb.site/actions?query=workflow%3Apkgdown)
 [![codecov](https://codecov.io/github/KWB-R/kwb.site/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/kwb.site)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/kwb.site)]()
+[![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/kwb.site)](https://kwb-r.r-universe.dev/)
 
 This package contains functions for scraping
 our offical [KWB website](https://kompetenz-wasser.de). The data for
