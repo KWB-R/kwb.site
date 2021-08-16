@@ -1,7 +1,7 @@
 [![R-CMD-check](https://github.com/KWB-R/kwb.site/workflows/R-CMD-check/badge.svg)](https://github.com/KWB-R/kwb.site/actions?query=workflow%3AR-CMD-check)
 [![pkgdown](https://github.com/KWB-R/kwb.site/workflows/pkgdown/badge.svg)](https://github.com/KWB-R/kwb.site/actions?query=workflow%3Apkgdown)
 [![codecov](https://codecov.io/github/KWB-R/kwb.site/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/kwb.site)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/kwb.site)]()
 [![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/kwb.site)](https://kwb-r.r-universe.dev/)
 
