@@ -12,6 +12,7 @@ extract_funder_ids <- function(funder_logo_urls)
 {
   funder_list <- list(
     ".*abwasserverband-braunschweig.*" = "av-bs",
+    ".*bsw.*|.*berliner-stadtwerke.*" = "bsw",
     ".*bwb.*|.*berliner-wasserbetriebe.*" = "bwb",
     ".*veolia.*" = "veolia",
     ".*_eu-*|.*eu_logo.*|.*eu-flagge.*|.*ddab935499.*" = "eu",

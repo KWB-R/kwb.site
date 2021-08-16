@@ -1,13 +1,14 @@
-[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/github/KWB-R/kwb.site?branch=master&svg=true)](https://ci.appveyor.com/project/KWB-R/kwb-site/branch/master)
-[![Travis build Status](https://travis-ci.org/KWB-R/kwb.site.svg?branch=master)](https://travis-ci.org/KWB-R/kwb.site)
+[![R-CMD-check](https://github.com/KWB-R/kwb.site/workflows/R-CMD-check/badge.svg)](https://github.com/KWB-R/kwb.site/actions?query=workflow%3AR-CMD-check)
+[![pkgdown](https://github.com/KWB-R/kwb.site/workflows/pkgdown/badge.svg)](https://github.com/KWB-R/kwb.site/actions?query=workflow%3Apkgdown)
 [![codecov](https://codecov.io/github/KWB-R/kwb.site/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/kwb.site)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/kwb.site)]()
+[![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/kwb.site)](https://kwb-r.r-universe.dev/)
 
 # kwb.site
 
 This package contains functions for scraping
-our offical [KWB website](https://kompetenz-wasser.de). The data for
+our official [KWB website](https://kompetenz-wasser.de). The data for
 all projects and people can be collected in order to provide an
 overview of the website`s content and in order to be integrate that
 data into a KWB knowledge repo.
@@ -27,10 +28,6 @@ if (!require("remotes")) {
 install.packages("remotes", repos = "https://cloud.r-project.org")
 }
 
-### Temporal workaround to due bug in latest CRAN of R package remotes v2.0.2
-### on Windows(for details: see https://github.com/r-lib/remotes/issues/248)
-
-remotes::install_github("r-lib/remotes@18c7302637053faf21c5b025e1e9243962db1bdc")
 remotes::install_github("KWB-R/kwb.site")
 ```
 
