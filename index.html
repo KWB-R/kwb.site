@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R Package for Scraping Our Offical KWB Website • kwb.site</title>
+<title>R Package for Scraping Our Offical KWB Website (Before Re-Design in 2021) • kwb.site</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="R Package for Scraping Our Offical KWB Website">
+<script src="pkgdown.js"></script><meta property="og:title" content="R Package for Scraping Our Offical KWB Website (Before Re-Design in 2021)">
 <meta property="og:description" content="This package contains functions for scraping
     our offical [KWB website](https://kompetenz-wasser.de). The data for
     all projects and people can be collected in order to provide an
@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">kwb.site</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -133,6 +133,8 @@
 <ul class="list-unstyled">
 <li>
 <a href="https://mrustl.de">Michael Rustler</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9134-2871" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://www.kompetenz-wasser.de/en/project/fakin/"><img src="https://www.kompetenz-wasser.de/wp-content/uploads/2017/08/forschung-headerbild_fakin-2-1920x449.jpg" height="24"></a> <br><small class="roles"> Funder </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -140,11 +142,12 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://ci.appveyor.com/project/KWB-R/kwb-site"><img src="https://ci.appveyor.com/api/projects/status/dlw7m5o8dtnjjqt9?svg=true" alt="Appveyor build Status"></a></li>
-<li><a href="https://travis-ci.org/KWB-R/kwb.site"><img src="https://travis-ci.org/KWB-R/kwb.site.svg?branch=master" alt="Travis build Status"></a></li>
+<li><a href="https://github.com/KWB-R/kwb.site/actions?query=workflow%3AR-CMD-check"><img src="https://github.com/KWB-R/kwb.site/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/KWB-R/kwb.site/actions?query=workflow%3Apkgdown"><img src="https://github.com/KWB-R/kwb.site/workflows/pkgdown/badge.svg" alt="pkgdown"></a></li>
 <li><a href="https://codecov.io/github/KWB-R/kwb.site"><img src="https://codecov.io/github/KWB-R/kwb.site/branch/master/graphs/badge.svg" alt="codecov"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded"><img src="https://img.shields.io/badge/lifecycle-superseded-blue.svg" alt="Lifecycle: superseded"></a></li>
 <li><a href=""><img src="https://www.r-pkg.org/badges/version/kwb.site" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://kwb-r.r-universe.dev/"><img src="https://kwb-r.r-universe.dev/badges/kwb.site" alt="R-Universe_Status_Badge"></a></li>
 </ul>
 </div>
 </div>
@@ -152,7 +155,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://mrustl.de">Michael Rustler</a>.</p>
+  <p>Developed by <a href="https://mrustl.de">Michael Rustler</a>, <a href="https://www.kompetenz-wasser.de/en/project/fakin/"><img src="https://www.kompetenz-wasser.de/wp-content/uploads/2017/08/forschung-headerbild_fakin-2-1920x449.jpg" height="24"></a>.</p>
 </div>
 
 <div class="pkgdown">
