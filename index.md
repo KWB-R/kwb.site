@@ -6,7 +6,7 @@
 [![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/kwb.site)](https://kwb-r.r-universe.dev/)
 
 This package contains functions for scraping
-our offical [KWB website](https://kompetenz-wasser.de). The data for
+our official [KWB website](https://kompetenz-wasser.de). The data for
 all projects and people can be collected in order to provide an
 overview of the website`s content and in order to be integrate that
 data into a KWB knowledge repo.
