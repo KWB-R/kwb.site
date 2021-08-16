@@ -7,6 +7,8 @@ Authors@R:
              role = c("aut", "cre"),
              email = "michael.rustler@kompetenz-wasser.de",
              comment = c(ORCID = "0000-0001-9134-2871")),
+      person(given = "FAKIN",
+             role = "fnd"),
       person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
              role = "cph"))
 Description: This package contains functions for scraping
